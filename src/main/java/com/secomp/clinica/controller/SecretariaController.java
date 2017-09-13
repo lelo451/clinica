@@ -8,16 +8,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,7 +47,7 @@ public class SecretariaController {
     }
 
     @PostMapping
-    public String salvar(@Validated Paciente paciente, Errors br, RedirectAttributes ra) {
+    public String salvar(@Valid Paciente paciente, BindingResult br, RedirectAttributes ra) {
         if(br.hasErrors()) {
             return "secretaria/cadastro";
         }
@@ -77,5 +71,19 @@ public class SecretariaController {
     public String listar(Model model) {
         model.addAttribute("pacientes", pacienteRepository.findAll());
         return "secretaria/list";
+    }
+
+    @GetMapping("/{id}")
+    public String update(Model model, @PathVariable Integer id) {
+        model.addAttribute("paciente", pacienteRepository.findOne(id));
+        model.addAttribute("update", true);
+        return "secretaria/cadastro";
+    }
+
+    @PostMapping("/{id}")
+    public String updatePaciente(Paciente paciente, RedirectAttributes ra) {
+        pacienteRepository.save(paciente);
+        ra.addFlashAttribute("sucesso", "Paciente " + paciente.getNome() + " atualizado com sucesso!");
+        return "redirect:/list";
     }
 }

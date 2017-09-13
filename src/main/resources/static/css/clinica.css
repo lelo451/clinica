@@ -31,3 +31,7 @@ header {
 .secretaria-menu img {
     margin-bottom: 5pt;
 }
+
+.obrigatorio {
+    color: red;
+}

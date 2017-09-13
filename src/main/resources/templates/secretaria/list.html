@@ -46,36 +46,28 @@
                     <br/>
                     <table class="table table-bordered table-striped table-sm table-responsive">
                         <thead>
-                        <tr>
-                            <th class="text-center">CPF</th>
-                            <th class="text-center">Nome</th>
-                            <th class="text-center">Data de Nascimento</th>
-                            <th class="text-center">Cidade</th>
-                            <th class="text-center">Endereço</th>
-                            <th class="text-center">Complemento</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Telefone</th>
-                            <th class="text-center">Estado</th>
-                            <th class="text-center">Editar/Excluir</th>
+                        <tr class="text-center">
+                            <th>CPF</th>
+                            <th>Nome</th>
+                            <th>Data de Nascimento</th>
+                            <th>Visualizar</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="paciente: ${pacientes}">
-                            <td class="text-center" th:text="${paciente.cpf}"></td>
-                            <td class="text-center" th:text="${paciente.nome}"></td>
-                            <td class="text-center" th:text="${{paciente.dataNascimento}}"></td>
-                            <td class="text-center" th:text="${paciente.cidade}"></td>
-                            <td class="text-center" th:text="${paciente.endereco}"></td>
-                            <td class="text-center" th:text="${paciente.complemento}"></td>
-                            <td class="text-center" th:text="${paciente.email}"></td>
-                            <td class="text-center" th:text="${paciente.telefone}"></td>
-                            <td class="text-center" th:text="${paciente.estado.estado}"></td>
+                        <tr th:each="paciente: ${pacientes}" class="text-center">
+                            <td th:text="${paciente.cpf}"></td>
+                            <td th:text="${paciente.nome}"></td>
+                            <td th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></td>
+                            <td></td>
                             <td class="text-center">
-                                <a class="btn btn-link btn-xs" href="#" title="Editar" rel="tooltip"
+                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
                                    data-placement="top">
                                     <img th:src="@{/img/love.png}" width="40" height="40"/>
                                 </a>
                             </td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>
@@ -84,5 +76,8 @@
         </div>
     </div>
 </div>
+<script>
+    $('[rel="tooltip"]').tooltip();
+</script>
 </body>
 </html>
