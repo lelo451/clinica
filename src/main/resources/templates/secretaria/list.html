@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="pt-br">
+    <title>Saúde &amp; Cia - Lista de Pacientes</title>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom-lista">
+        <a class="navbar-brand" th:href="@{/secretaria}">
+            <img th:src="@{/img/man.png}" alt="Saúde e Cia" width="30"/>
+            <span>Lista de Pacientes</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#mobile-menu"
+                aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mobile-menu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Médico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/secretaria}">Secretária</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Notificações</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-warning mb-3">
+                <div class="card-header">Menu da Secretária</div>
+                <div class="card-body text-warning">
+                    <h4 class="card-title">Lista de pacientes</h4>
+                    <p class="card-text">Abaixo é exibido a lista de todos os pacientes cadastrados no sistema.<br/>É
+                        possível editá-los ou excluí-los</p>
+                    <br/>
+                    <table class="table table-bordered table-striped table-sm table-responsive">
+                        <thead>
+                        <tr>
+                            <th class="text-center">CPF</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Data de Nascimento</th>
+                            <th class="text-center">Cidade</th>
+                            <th class="text-center">Endereço</th>
+                            <th class="text-center">Complemento</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Telefone</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Editar/Excluir</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="paciente: ${pacientes}">
+                            <td class="text-center" th:text="${paciente.cpf}"></td>
+                            <td class="text-center" th:text="${paciente.nome}"></td>
+                            <td class="text-center" th:text="${{paciente.dataNascimento}}"></td>
+                            <td class="text-center" th:text="${paciente.cidade}"></td>
+                            <td class="text-center" th:text="${paciente.endereco}"></td>
+                            <td class="text-center" th:text="${paciente.complemento}"></td>
+                            <td class="text-center" th:text="${paciente.email}"></td>
+                            <td class="text-center" th:text="${paciente.telefone}"></td>
+                            <td class="text-center" th:text="${paciente.estado.estado}"></td>
+                            <td class="text-center">
+                                <a class="btn btn-link btn-xs" href="#" title="Editar" rel="tooltip"
+                                   data-placement="top">
+                                    <img th:src="@{/img/love.png}" width="40" height="40"/>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

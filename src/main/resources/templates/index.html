@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="pt-br">
+    <title>Saúde &amp; Cia</title>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/img/boba-fett.png}" alt="Saúde e Cia" width="30"/>
+            <span>Saúde &amp; Cia</span>
+        </a>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center home-block">
+            <img th:src="@{/img/medical.png}" height="128" width="128"/>
+            <br/>
+            <a href="#" class="btn btn-outline-success">Médico</a>
+        </div>
+        <br/>
+        <div class="col-12 text-center home-block">
+            <img th:src="@{/img/flight-attendant.png}" height="128" width="128"/>
+            <br/><br/>
+            <a th:href="@{/secretaria}" class="btn btn-outline-danger">Secretária</a>
+        </div>
+        <br/>
+        <div class="col-12 text-center home-block">
+            <img th:src="@{/img/notification.png}" height="128" width="128"/>
+            <br/><br/>
+            <a href="#" class="btn btn-outline-primary">Notificações</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
