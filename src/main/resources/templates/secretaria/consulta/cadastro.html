@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head lang="pt-br">
+    <title th:text="${update} == true ? 'Saúde &amp; Cia - Editar Consulta' : 'Saúde &amp; Cia - Nova Consulta'"></title>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <a class="navbar-brand" th:href="@{/secretaria}">
+            <img th:src="@{/img/princess-leia.png}" alt="Saúde e Cia" width="30"/>
+            <span>Secretária</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#mobile-menu"
+                aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mobile-menu">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Médico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Notificações</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div th:if="${erro}">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span th:text="${erro}"></span>
+                </div>
+            </div>
+            <div class="card border-dark">
+                <div class="card-header" th:text="${update} == true ? 'Editar Consulta' : 'Nova Consulta' "></div>
+                <div class="card-body text-dark">
+                    <h4 class="card-title">Digite as informações do Paciente</h4>
+                    <form method="POST"
+                          th:action="@{${update} == true ? '/secretaria/consulta' + ${paciente.id} : '/secretaria/consulta'}"
+                          th:object="${consulta}" onsubmit="return validar()">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="cpf" class="col-form-label">CPF do Paciente<span class="obrigatorio">*</span></label>
+                                <input class="form-control" placeholder="Digite o CPF" type="text"
+                                       id="cpf" name="cpf" value="" maxlength="14" th:readonly="${update} == true ? 'readonly' : false" required="required"/>
+                                <div id="CPFerror" class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="dataConsulta" class="col-form-label">Data da Consulta<span class="obrigatorio">*</span></label>
+                                <input type="text" class="form-control" th:field="*{dataConsulta}"
+                                       placeholder="dd/mm/yyyy" required="required"/>
+                                <div id="DataError" class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group col-4">
+                                <label class="col-form-label">Tipo de Consulta<span class="obrigatorio">*</span></label>
+                                <select class="form-control" th:field="*{tipoConsulta}" required="required">
+                                    <option th:each="consulta : ${T(com.secomp.clinica.model.enuns.TipoConsulta).values()}"
+                                            th:value="${consulta}"
+                                            th:text="${consulta.consulta}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="medico" class="col-form-label">Médico<span class="obrigatorio">*</span></label>
+                                <input type="text" class="form-control" required="required" placeholder="Digite o nome do médico"
+                                       th:field="*{medico}"/>
+                                <div id="medicoError" class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="hora" class="col-form-label">Horário<span class="obrigatorio">*</span></label>
+                                <select class="form-control" th:field="*{hora}" required="required">
+                                    <option value="">Digite o Nome do Médico</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" id="btnsubmit" class="btn btn-primary" th:text="${update} == true ? 'Atualizar Consulta' : 'Agendar Consulta'"></button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                            Cancelar
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" th:text="${update} == true ? 'Editar Consulta' : 'Cancelar Consulta'"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" th:text="${update} == true ? 'Tem certeza que deseja cancelar a edição da consulta?' : 'Tem certeza que deseja cancelar a consulta?'">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não
+                                        </button>
+                                        <a th:href="@{/secretaria}">
+                                            <button type="button" class="btn btn-primary">Sim</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /* <![CDATA[ */
+    $(document).ready(function () {
+        $('#cpf').mask('000.000.000-00');
+        $('#dataConsulta').mask('00/00/0000').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight: true,
+            language: 'pt-BR'
+        });
+    });
+    var dataDisabled = false;
+    var cpfDisable = false;
+    $('#cpf').focusout(function () {
+        var cpf = validaCPF();
+        if(cpf) {
+            if(!dataDisabled) {
+                $('#btnsubmit').attr('disabled', false);
+                cpfDisable = false;
+            }
+            $(this).removeClass('is-invalid');
+        } else {
+            $('#btnsubmit').attr('disabled', true);
+            $(this).addClass('is-invalid');
+            $('#CPFerror').text("CPF Inválido");
+            cpfDisable = true;
+        }
+    });
+    $('#dataConsulta').change(function () {
+        var today = getToday();
+        var consulta = $(this).val();
+        if(consulta >= today) {
+            if(!cpfDisable) {
+                $('#btnsubmit').attr('disabled', false);
+                dataDisabled = false;
+            }
+            $(this).removeClass('is-invalid');
+        } else {
+            $('#btnsubmit').attr('disabled', true);
+            $(this).addClass('is-invalid');
+            $('#DataError').text("Data Inválida");
+            dataDisabled = true;
+        }
+    });
+    document.getElementById('medico').addEventListener('change', function () {
+            $.ajax({
+                type: "POST",
+                data: {
+                    medico: $('#medico').val(),
+                    data: $('#dataConsulta').val(),
+                    tipo_consulta: $('#tipoConsulta').val()
+                },
+                cache: false,
+                url: "/secretaria/horario",
+                success: function (data) {
+                    var hora = $('#hora');
+                    hora.find("option").remove();
+                    var select = document.getElementById('hora');
+                    $.each(data, function (key, value) {
+                        var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                        var opt = document.createElement('option');
+                        opt.value = time;
+                        opt.innerHTML = time;
+                        select.appendChild(opt);
+                    });
+                }, error: function () {
+                    var opt = document.createElement('option');
+                    opt.value = "";
+                    opt.innerHTML = "Digite o nome do medico";
+                    select.appendChild(opt);
+                }
+            });
+    });
+/* ]]> */
+</script>
+</body>
+</html>

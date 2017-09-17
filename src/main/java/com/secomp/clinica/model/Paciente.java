@@ -1,5 +1,6 @@
 package com.secomp.clinica.model;
 
+import com.secomp.clinica.model.enuns.Estado;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
