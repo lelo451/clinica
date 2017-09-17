@@ -1,4 +1,4 @@
-package com.secomp.clinica.model;
+package com.secomp.clinica.model.enuns;
 
 public enum Estado {
     AC("Acre"),

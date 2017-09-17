@@ -93,7 +93,7 @@
                             <div class="form-group col-4">
                                 <label class="col-form-label">Estado<span class="obrigatorio">*</span></label>
                                 <select class="form-control" th:field="*{estado}">
-                                    <option th:each="sigla : ${T(com.secomp.clinica.model.Estado).values()}"
+                                    <option th:each="sigla : ${T(com.secomp.clinica.model.enuns.Estado).values()}"
                                             th:value="${sigla}"
                                             th:text="${sigla.estado}"></option>
                                 </select>
