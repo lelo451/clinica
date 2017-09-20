@@ -84,6 +84,12 @@ public class SecretariaController {
         return "secretaria/paciente/list";
     }
 
+    @GetMapping("/listConsulta")
+    public String listarConsultas(Model model) {
+        model.addAttribute("consultas", consultaRepository.findAll());
+        return "secretaria/consulta/list";
+    }
+
     @GetMapping("/{id}")
     public String update(Model model, @PathVariable Integer id) {
         model.addAttribute("paciente", pacienteRepository.findOne(id));

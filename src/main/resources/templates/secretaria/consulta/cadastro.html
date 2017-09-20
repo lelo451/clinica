@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="pt-br">
     <title th:text="${update} == true ? 'Saúde &amp; Cia - Editar Consulta' : 'Saúde &amp; Cia - Nova Consulta'"></title>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
@@ -45,9 +45,9 @@
             <div class="card border-dark">
                 <div class="card-header" th:text="${update} == true ? 'Editar Consulta' : 'Nova Consulta' "></div>
                 <div class="card-body text-dark">
-                    <h4 class="card-title">Digite as informações do Paciente</h4>
+                    <h4 class="card-title">Digite as informações da Consulta</h4>
                     <form method="POST"
-                          th:action="@{${update} == true ? '/secretaria/consulta' + ${paciente.id} : '/secretaria/consulta'}"
+                          th:action="@{${update} == true ? '/secretaria/consulta' + ${consulta.id} : '/secretaria/consulta'}"
                           th:object="${consulta}" onsubmit="return validar()">
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -160,6 +160,79 @@
             dataDisabled = true;
         }
     });
+    $('#dataConsulta').focusout().trigger('change');
+    document.getElementById('cpf').addEventListener('change', function () {
+            $.ajax({
+                type: "POST",
+                data: {
+                    medico: $('#medico').val(),
+                    data: $('#dataConsulta').val(),
+                    tipo_consulta: $('#tipoConsulta').val()
+                },
+                cache: false,
+                url: "/secretaria/horario",
+                success: function (data) {
+                    var hora = $('#hora');
+                    hora.find("option").remove();
+                    var select = document.getElementById('hora');
+                    if(!$.trim(data)) {
+                        var opt = document.createElement('option');
+                        opt.value = "";
+                        opt.innerHTML = "Nenhum horário disponivel";
+                        select.appendChild(opt);
+                    } else {
+                        $.each(data, function (key, value) {
+                            var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                            var opt = document.createElement('option');
+                            opt.value = time;
+                            opt.innerHTML = time;
+                            select.appendChild(opt);
+                        });
+                    }
+                }, error: function () {
+                    var opt = document.createElement('option');
+                    opt.value = "";
+                    opt.innerHTML = "Digite o nome do medico";
+                    select.appendChild(opt);
+                }
+            });
+    });
+    document.getElementById('dataConsulta').addEventListener('change', function () {
+            $.ajax({
+                type: "POST",
+                data: {
+                    medico: $('#medico').val(),
+                    data: $('#dataConsulta').val(),
+                    tipo_consulta: $('#tipoConsulta').val()
+                },
+                cache: false,
+                url: "/secretaria/horario",
+                success: function (data) {
+                    var hora = $('#hora');
+                    hora.find("option").remove();
+                    var select = document.getElementById('hora');
+                    if(!$.trim(data)) {
+                        var opt = document.createElement('option');
+                        opt.value = "";
+                        opt.innerHTML = "Nenhum horário disponivel";
+                        select.appendChild(opt);
+                    } else {
+                        $.each(data, function (key, value) {
+                            var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                            var opt = document.createElement('option');
+                            opt.value = time;
+                            opt.innerHTML = time;
+                            select.appendChild(opt);
+                        });
+                    }
+                }, error: function () {
+                    var opt = document.createElement('option');
+                    opt.value = "";
+                    opt.innerHTML = "Digite o nome do medico";
+                    select.appendChild(opt);
+                }
+            });
+    });
     document.getElementById('medico').addEventListener('change', function () {
             $.ajax({
                 type: "POST",
@@ -174,13 +247,20 @@
                     var hora = $('#hora');
                     hora.find("option").remove();
                     var select = document.getElementById('hora');
-                    $.each(data, function (key, value) {
-                        var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                    if(!$.trim(data)) {
                         var opt = document.createElement('option');
-                        opt.value = time;
-                        opt.innerHTML = time;
+                        opt.value = "";
+                        opt.innerHTML = "Nenhum horário disponivel";
                         select.appendChild(opt);
-                    });
+                    } else {
+                        $.each(data, function (key, value) {
+                            var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                            var opt = document.createElement('option');
+                            opt.value = time;
+                            opt.innerHTML = time;
+                            select.appendChild(opt);
+                        });
+                    }
                 }, error: function () {
                     var opt = document.createElement('option');
                     opt.value = "";

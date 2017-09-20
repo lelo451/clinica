@@ -5,10 +5,15 @@ import com.secomp.clinica.repository.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 @Component
@@ -33,20 +38,25 @@ public class Horario {
         return listaHoras;
     }
 
-    public ArrayList<LocalTime> horariosDisponiveis(Date data, String tipo, String medico, LocalTime time) {
+    public ArrayList<LocalTime> horariosDisponiveis(Date data, String tipo, String medico, LocalTime time){
 
         boolean limitaHorario = false;
 
         LocalDate date = LocalDate.now();
-        System.out.println("Agora: " + date + "\nData da consulta: " + data);
+        LocalDate d = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        if(date.equals(data)) {
+        System.out.println("Agora: " + date + "\nData da consulta: " + d);
+
+        if(date.equals(d)) {
             limitaHorario = true;
         }
 
         ArrayList<LocalTime> horas = todosHorarios();
 
         List<Consulta> listaConsultas = consultaRepository.findAllByDataConsulta(data);
+
+        if(medico.equals(""))
+            return null;
 
         for(int i = 0; i < listaConsultas.size(); i++) {
             if(medico.equals(listaConsultas.get(i).getMedico())) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="pt-br">
     <title>Saúde &amp; Cia - Secretária</title>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
@@ -96,7 +96,7 @@
                                     <li class="nav-item col-6 secretaria-menu">
                                         <img th:src="@{/img/analytics.png}" height="128" width="128"/>
                                         <br/>
-                                        <button type="button" class="btn btn-dark">Listar Consultas</button>
+                                        <a th:href="@{/secretaria/listConsulta}" class="btn btn-dark">Listar Consultas</a>
                                     </li>
                                 </ul>
                             </div>
