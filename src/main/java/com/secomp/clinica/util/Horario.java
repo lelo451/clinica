@@ -45,8 +45,6 @@ public class Horario {
         LocalDate date = LocalDate.now();
         LocalDate d = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        System.out.println("Agora: " + date + "\nData da consulta: " + d);
-
         if(date.equals(d)) {
             limitaHorario = true;
         }

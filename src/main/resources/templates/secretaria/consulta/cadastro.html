@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head lang="pt-br">
+<html>
+<head>
     <title th:text="${update} == true ? 'Saúde &amp; Cia - Editar Consulta' : 'Saúde &amp; Cia - Nova Consulta'"></title>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
 </head>
@@ -159,45 +159,42 @@
             $('#DataError').text("Data Inválida");
             dataDisabled = true;
         }
-    });
-    $('#dataConsulta').focusout().trigger('change');
-    document.getElementById('cpf').addEventListener('change', function () {
-            $.ajax({
-                type: "POST",
-                data: {
-                    medico: $('#medico').val(),
-                    data: $('#dataConsulta').val(),
-                    tipo_consulta: $('#tipoConsulta').val()
-                },
-                cache: false,
-                url: "/secretaria/horario",
-                success: function (data) {
-                    var hora = $('#hora');
-                    hora.find("option").remove();
-                    var select = document.getElementById('hora');
-                    if(!$.trim(data)) {
-                        var opt = document.createElement('option');
-                        opt.value = "";
-                        opt.innerHTML = "Nenhum horário disponivel";
-                        select.appendChild(opt);
-                    } else {
-                        $.each(data, function (key, value) {
-                            var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
-                            var opt = document.createElement('option');
-                            opt.value = time;
-                            opt.innerHTML = time;
-                            select.appendChild(opt);
-                        });
-                    }
-                }, error: function () {
+        $.ajax({
+            type: "POST",
+            data: {
+                medico: $('#medico').val(),
+                data: $('#dataConsulta').val(),
+                tipo_consulta: $('#tipoConsulta').val()
+            },
+            cache: false,
+            url: "/secretaria/horario",
+            success: function (data) {
+                var hora = $('#hora');
+                hora.find("option").remove();
+                var select = document.getElementById('hora');
+                if(!$.trim(data)) {
                     var opt = document.createElement('option');
                     opt.value = "";
-                    opt.innerHTML = "Digite o nome do medico";
+                    opt.innerHTML = "Nenhum horário disponivel";
                     select.appendChild(opt);
+                } else {
+                    $.each(data, function (key, value) {
+                        var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                        var opt = document.createElement('option');
+                        opt.value = time;
+                        opt.innerHTML = time;
+                        select.appendChild(opt);
+                    });
                 }
-            });
+            }, error: function () {
+                var opt = document.createElement('option');
+                opt.value = "";
+                opt.innerHTML = "Digite o nome do medico";
+                select.appendChild(opt);
+            }
+        });
     });
-    document.getElementById('dataConsulta').addEventListener('change', function () {
+    document.getElementById('cpf').addEventListener('change', function () {
             $.ajax({
                 type: "POST",
                 data: {

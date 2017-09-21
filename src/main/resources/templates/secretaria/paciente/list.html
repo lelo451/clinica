@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="pt-br">
+<head>
     <title>Saúde &amp; Cia - Lista de Pacientes</title>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
 </head>
@@ -46,13 +46,13 @@
                     <br/>
                     <table class="table table-bordered table-striped table-sm table-responsive">
                         <thead>
-                        <tr>
-                            <th class="text-center">CPF</th>
-                            <th class="text-center">Nome</th>
-                            <th class="text-center">Data de Nascimento</th>
-                            <th class="text-center">Visualizar</th>
-                            <th class="text-center">Editar</th>
-                            <th class="text-center">Excluir</th>
+                        <tr class="text-center">
+                            <th>CPF</th>
+                            <th>Nome</th>
+                            <th>Data de Nascimento</th>
+                            <th>Visualizar</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,7 +61,7 @@
                             <td th:text="${paciente.nome}"></td>
                             <td th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></td>
                             <td></td>
-                            <td class="text-center">
+                            <td>
                                 <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
                                    data-placement="top">
                                     <img th:src="@{/img/love.png}" width="40" height="40"/>

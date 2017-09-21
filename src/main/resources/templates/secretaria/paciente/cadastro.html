@@ -144,12 +144,7 @@
     $(document).ready(function () {
         $('#cpf').mask('000.000.000-00');
         $('#dataNascimento').mask('00/00/0000', {placeholder: "__/__/____"});
-        $('#telefone').mask('(00) 0000-000000').keyup(function () {
-            var size = $(this).val().length;
-            if (size > 14) {
-                $(this).mask('(00) 00000-0000');
-            }
-        });
+        $('#telefone').mask('(00) 00000-00000');
     });
     $('#dataNascimento').datepicker({
         format: 'dd/mm/yyyy',
