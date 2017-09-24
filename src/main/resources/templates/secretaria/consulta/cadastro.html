@@ -48,14 +48,8 @@
                     <h4 class="card-title">Digite as informações da Consulta</h4>
                     <form method="POST"
                           th:action="@{${update} == true ? '/secretaria/consulta' + ${consulta.id} : '/secretaria/consulta'}"
-                          th:object="${consulta}" onsubmit="return validar()">
+                          th:object="${consulta}">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="cpf" class="col-form-label">CPF do Paciente<span class="obrigatorio">*</span></label>
-                                <input class="form-control" placeholder="Digite o CPF" type="text"
-                                       id="cpf" name="cpf" value="" maxlength="14" th:readonly="${update} == true ? 'readonly' : false" required="required"/>
-                                <div id="CPFerror" class="invalid-feedback"></div>
-                            </div>
                             <div class="form-group col-md-4">
                                 <label for="dataConsulta" class="col-form-label">Data da Consulta<span class="obrigatorio">*</span></label>
                                 <input type="text" class="form-control" th:field="*{dataConsulta}"
@@ -72,17 +66,16 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="medico" class="col-form-label">Médico<span class="obrigatorio">*</span></label>
-                                <!--<select class="form-control" th:field="*{medico}" required="required">
+                                <select class="form-control" th:field="*{medico}" required="required">
+                                    <option value="">Selecione o Médico</option>
                                     <option th:each="medico : ${medicos}" th:value="${medico.nome}" th:text="${medico.nome}"></option>
-                                </select>-->
-                                <input type="text" class="form-control" required="required" placeholder="Digite o nome do médico"
-                                       th:field="*{medico}"/>
+                                </select>
                                 <div id="medicoError" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-6">
                                 <label for="hora" class="col-form-label">Horário<span class="obrigatorio">*</span></label>
                                 <select class="form-control" th:field="*{hora}" required="required">
-                                    <option value="">Digite o Nome do Médico</option>
+                                    <option value="">Selecione o Médico</option>
                                 </select>
                             </div>
                         </div>
@@ -122,7 +115,6 @@
 <script>
     /* <![CDATA[ */
     $(document).ready(function () {
-        $('#cpf').mask('000.000.000-00');
         $('#dataConsulta').mask('00/00/0000').datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true,
@@ -130,37 +122,16 @@
             language: 'pt-BR'
         });
     });
-    var dataDisabled = false;
-    var cpfDisable = false;
-    $('#cpf').focusout(function () {
-        var cpf = validaCPF();
-        if(cpf) {
-            if(!dataDisabled) {
-                $('#btnsubmit').attr('disabled', false);
-                cpfDisable = false;
-            }
-            $(this).removeClass('is-invalid');
-        } else {
-            $('#btnsubmit').attr('disabled', true);
-            $(this).addClass('is-invalid');
-            $('#CPFerror').text("CPF Inválido");
-            cpfDisable = true;
-        }
-    });
     $('#dataConsulta').change(function () {
         var today = getToday();
         var consulta = $(this).val();
         if(consulta >= today) {
-            if(!cpfDisable) {
-                $('#btnsubmit').attr('disabled', false);
-                dataDisabled = false;
-            }
+            $('#btnsubmit').attr('disabled', false);
             $(this).removeClass('is-invalid');
         } else {
             $('#btnsubmit').attr('disabled', true);
             $(this).addClass('is-invalid');
             $('#DataError').text("Data Inválida");
-            dataDisabled = true;
         }
         $.ajax({
             type: "POST",
@@ -196,42 +167,6 @@
                 select.appendChild(opt);
             }
         });
-    });
-    document.getElementById('cpf').addEventListener('change', function () {
-            $.ajax({
-                type: "POST",
-                data: {
-                    medico: $('#medico').val(),
-                    data: $('#dataConsulta').val(),
-                    tipo_consulta: $('#tipoConsulta').val()
-                },
-                cache: false,
-                url: "/secretaria/horario",
-                success: function (data) {
-                    var hora = $('#hora');
-                    hora.find("option").remove();
-                    var select = document.getElementById('hora');
-                    if(!$.trim(data)) {
-                        var opt = document.createElement('option');
-                        opt.value = "";
-                        opt.innerHTML = "Nenhum horário disponivel";
-                        select.appendChild(opt);
-                    } else {
-                        $.each(data, function (key, value) {
-                            var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
-                            var opt = document.createElement('option');
-                            opt.value = time;
-                            opt.innerHTML = time;
-                            select.appendChild(opt);
-                        });
-                    }
-                }, error: function () {
-                    var opt = document.createElement('option');
-                    opt.value = "";
-                    opt.innerHTML = "Digite o nome do medico";
-                    select.appendChild(opt);
-                }
-            });
     });
     document.getElementById('medico').addEventListener('change', function () {
             $.ajax({

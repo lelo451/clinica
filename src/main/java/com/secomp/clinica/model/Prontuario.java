@@ -8,24 +8,32 @@ public class Prontuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "prontuario_id")
     private Integer id;
+
+    @Column(name = "prontuario_medico")
     private String medico;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "prontuario_data_consulta")
     private Date data_consulta;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(name = "prontuario_sintomas")
     private String sintomas;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(name = "prontuario_diagnostico")
     private String diagnostico;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @Column(name = "prontuario_receita")
     private String receita;
 
+    @Column(name = "prontuario_assinatura")
     private String assinatura;
 
     @ManyToOne

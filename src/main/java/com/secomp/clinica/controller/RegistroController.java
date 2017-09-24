@@ -65,7 +65,6 @@ public class RegistroController {
             ra.addFlashAttribute("erro", "As senhas devem ser iguais");
             return "register";
         }
-        usuario.setRole(Role.ROLE_PACIENTE);
         usuario.setPassword(pe().encode(usuario.getPassword()));
         System.out.println(usuario.getRole());
         ur.save(usuario);
