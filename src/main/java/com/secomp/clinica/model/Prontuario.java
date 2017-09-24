@@ -69,4 +69,9 @@ public class Prontuario {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+    public Prontuario(){}
+    public Prontuario(Paciente paciente){
+        this.paciente=paciente;
+    }
 }

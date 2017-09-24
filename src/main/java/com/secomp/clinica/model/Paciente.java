@@ -49,7 +49,7 @@ public class Paciente {
     @Size(max = 50)
     private String cidade;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Prontuario prontuario;
 
     public Integer getId() {

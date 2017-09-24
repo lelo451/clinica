@@ -1,6 +1,7 @@
 package com.secomp.clinica.controller;
 
 import com.secomp.clinica.model.Consulta;
+import com.secomp.clinica.model.Paciente;
 import com.secomp.clinica.model.Prontuario;
 import com.secomp.clinica.model.Usuario;
 import com.secomp.clinica.model.enums.Role;
@@ -61,10 +62,14 @@ public class MedicoController {
 
     @GetMapping("/prontuario/{id}")
     public String prontuario(Model model, @PathVariable Integer id) {
-        Prontuario prontuario = pacienteRepository.findOne(id).getProntuario();
+        Paciente paciente = pacienteRepository.findOne(id);
+        Prontuario prontuario = paciente.getProntuario();
+        if (prontuario == null) {
+            prontuario = new Prontuario(paciente);
+        }
         model.addAttribute("prontuario", prontuario);
-        model.addAttribute("update", prontuario!=null);
-       return "/paciente/prontuario";
+        model.addAttribute("update", prontuario != null);
+        return "/paciente/prontuario";
     }
 
     @GetMapping("/{id}")
@@ -72,6 +77,20 @@ public class MedicoController {
         model.addAttribute("paciente", pacienteRepository.findOne(id));
         model.addAttribute("visualizar", true);
         return "/paciente/cadastro";
+    }
+
+    @PostMapping("/prontuario")
+    public String saveProntuario(@Valid Prontuario prontuario, BindingResult br, RedirectAttributes ra) {
+        if (br.hasErrors()) {
+            return "/paciente/prontuario";
+        }
+        System.out.println(prontuario);
+        Paciente paciente = prontuario.getPaciente();
+        prontuario.setMedico(SecurityContextHolder.getContext().getAuthentication().getName());
+        paciente.setProntuario(prontuario);
+        pacienteRepository.save(paciente);
+        ra.addFlashAttribute("sucesso", "Prontuário cadastrado com sucesso!");
+        return "redirect:/medico/list";
     }
 
 }
