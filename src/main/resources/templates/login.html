@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saúde &amp; Cia - Login</title>
+    <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 align-middle login">
+            <div th:if="${param.error}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span>Usuário e/ou senha incorreto</span>
+                </div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span>Deslogado com sucesso</span>
+                </div>
+            </div>
+            <div th:if="${sucesso}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span th:text="${sucesso}"></span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header text-center bg-info">
+                    <b>Login</b>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Entre com os dados para acessar a sua conta!
+                    </h4>
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" name="username" value="" required="" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" value="" required="" placeholder="Password"/>
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <span class="btn-registro">Não tem conta? <a th:href="@{/register}">Clique aqui</a></span>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+</body>
+</html>

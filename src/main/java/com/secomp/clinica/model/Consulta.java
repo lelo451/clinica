@@ -1,6 +1,6 @@
 package com.secomp.clinica.model;
 
-import com.secomp.clinica.model.enuns.TipoConsulta;
+import com.secomp.clinica.model.enums.TipoConsulta;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

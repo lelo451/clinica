@@ -35,3 +35,12 @@ header {
 .obrigatorio {
     color: red;
 }
+
+.login, .registro {
+    margin-top: 80pt;
+    margin-bottom: 20pt;
+}
+
+.btn-registro {
+    margin-top: 10pt;
+}

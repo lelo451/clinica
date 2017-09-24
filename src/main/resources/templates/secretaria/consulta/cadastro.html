@@ -65,13 +65,16 @@
                             <div class="form-group col-4">
                                 <label class="col-form-label">Tipo de Consulta<span class="obrigatorio">*</span></label>
                                 <select class="form-control" th:field="*{tipoConsulta}" required="required">
-                                    <option th:each="consulta : ${T(com.secomp.clinica.model.enuns.TipoConsulta).values()}"
+                                    <option th:each="consulta : ${T(com.secomp.clinica.model.enums.TipoConsulta).values()}"
                                             th:value="${consulta}"
                                             th:text="${consulta.consulta}"></option>
                                 </select>
                             </div>
                             <div class="form-group col-6">
                                 <label for="medico" class="col-form-label">Médico<span class="obrigatorio">*</span></label>
+                                <!--<select class="form-control" th:field="*{medico}" required="required">
+                                    <option th:each="medico : ${medicos}" th:value="${medico.nome}" th:text="${medico.nome}"></option>
+                                </select>-->
                                 <input type="text" class="form-control" required="required" placeholder="Digite o nome do médico"
                                        th:field="*{medico}"/>
                                 <div id="medicoError" class="invalid-feedback"></div>
