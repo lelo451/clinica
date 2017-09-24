@@ -11,6 +11,7 @@ import com.secomp.clinica.util.Horario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@PreAuthorize("hasAnyAuthority('ROLE_SECRETARIA', 'ROLE_MEDICO')")
 @RequestMapping("/secretaria")
 public class SecretariaController {
 

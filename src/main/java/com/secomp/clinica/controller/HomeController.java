@@ -20,6 +20,8 @@ public class HomeController {
     public String users() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
+        role = role.replace("[", "");
+        role = role.replace("]", "");
         if(role.equals(Role.ROLE_SECRETARIA.toString())) {
             return "redirect:/secretaria";
         } else {
