@@ -28,6 +28,9 @@
                     <a class="nav-link" href="#">Notificações</a>
                 </li>
                 <li class="nav-item">
+                    <span class="nav-link">Logado como: <span sec:authentication="name"></span></span>
+                </li>
+                <li class="nav-item">
                     <div hidden="hidden">
                         <form id="logout" action="#" th:action="@{/logout}" method="post">
                             <div class="form-action">

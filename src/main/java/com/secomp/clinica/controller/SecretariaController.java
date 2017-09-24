@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@PreAuthorize("hasAnyAuthority('ROLE_SECRETARIA', 'ROLE_MEDICO')")
+@PreAuthorize("hasAuthority('ROLE_SECRETARIA')")
 @RequestMapping("/secretaria")
 public class SecretariaController {
 

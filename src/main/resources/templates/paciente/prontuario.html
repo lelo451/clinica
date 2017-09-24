@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="pt-br">
-    <title th:text="'Saúde &amp; Cia - Prontuário do Paciente'"></title>
+    <title th:text="${update} == true ? 'Saúde &amp; Cia - Editar Paciente' : 'Saúde &amp; Cia - Cadastro de Paciente'"></title>
     <!--/*/ <th:block th:include="fragments/head :: head"></th:block> /*/-->
 </head>
 <body>
