@@ -26,7 +26,7 @@ public class Consulta {
     @NotNull
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "paciente_id")
-    private Usuario paciente;
+    private Paciente paciente;
 
     @Enumerated(EnumType.STRING)
     private TipoConsulta tipoConsulta;
@@ -63,11 +63,11 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public Usuario getPaciente() {
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Usuario paciente) {
+    public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 

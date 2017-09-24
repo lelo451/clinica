@@ -54,6 +54,7 @@
                                 <input id="cpf" class="form-control" placeholder="Digite o CPF" type="text"
                                        th:field="*{cpf}" th:readonly="${update} == true ? 'readonly' : false" required="required" th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="invalid-feedback"></div>
+                                <div id="CPFerror" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="dataNascimento" class="col-form-label">Data de nascimento<span class="obrigatorio">*</span></label>
@@ -106,7 +107,7 @@
                                       class="invalid-feedback"></div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" th:text="${update} == true ? 'Atualizar' : 'Cadastrar'"></button>
+                        <button id="btnsubimit" type="submit" class="btn btn-primary" th:text="${update} == true ? 'Atualizar' : 'Cadastrar'"></button>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
                             Cancelar
                         </button>
@@ -150,6 +151,17 @@
         format: 'dd/mm/yyyy',
         autoclose: true,
         language: 'pt-BR'
+    });
+    $('#cpf').focusout(function () {
+        var cpf = validaCPF();
+        if(cpf) {
+            $('#btnsubmit').attr('disabled', false);
+            $(this).removeClass('is-invalid');
+        } else {
+            $('#btnsubmit').attr('disabled', true);
+            $(this).addClass('is-invalid');
+            $('#CPFerror').text("CPF Inválido");
+        }
     });
     /* ]]> */
 </script>

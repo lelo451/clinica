@@ -27,8 +27,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Notificações</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="#" th:href="@{/logout}">Sair</a>
+                <li class="nav-item">
+                    <div hidden="hidden">
+                        <form id="logout" action="#" th:action="@{/logout}" method="post">
+                            <div class="form-action">
+                                <button type="submit">Sair</button>
+                            </div>
+                        </form>
+                    </div>
+                    <a href="javascript:document.getElementById('logout').submit()" class="nav-link"> Sair</a>
                 </li>
             </ul>
         </div>
@@ -94,7 +101,7 @@
                                     <li class="nav-item  col-6 secretaria-menu">
                                         <img th:src="@{/img/clipboard.png}" height="128" width="128"/>
                                         <br/>
-                                        <a th:href="@{/secretaria/consulta}" class="btn btn-dark">Agendar Consulta</a>
+                                        <a th:href="@{/secretaria/list}" class="btn btn-dark">Agendar Consulta</a>
                                     </li>
                                     <li class="nav-item col-6 secretaria-menu">
                                         <img th:src="@{/img/analytics.png}" height="128" width="128"/>

@@ -52,6 +52,7 @@
                             <th>Data de Nascimento</th>
                             <th>Visualizar</th>
                             <th>Editar</th>
+                            <th>Agendar Consulta</th>
                             <th>Excluir</th>
                         </tr>
                         </thead>
@@ -67,6 +68,7 @@
                                     <img th:src="@{/img/love.png}" width="40" height="40"/>
                                 </a>
                             </td>
+                            <td></td>
                             <td class="text-center">
                                 <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Excluir" rel="tooltip"
                                    data-placement="top">

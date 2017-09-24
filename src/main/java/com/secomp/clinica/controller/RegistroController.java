@@ -40,9 +40,7 @@ public class RegistroController {
 
     @GetMapping
     public String register_get(Model m) {
-        if(!m.containsAttribute("usuario")) {
-            m.addAttribute("usuario", new Usuario());
-        }
+        m.addAttribute("usuario", new Usuario());
         return "register";
     }
 
@@ -66,7 +64,6 @@ public class RegistroController {
             return "register";
         }
         usuario.setPassword(pe().encode(usuario.getPassword()));
-        System.out.println(usuario.getRole());
         ur.save(usuario);
         ra.addFlashAttribute("sucesso", "Usuario " + usuario.getUsername() + " cadastrado com sucesso!");
         return "redirect:/login";
