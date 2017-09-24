@@ -82,7 +82,7 @@ public class MedicoController {
         }
         System.out.println(prontuario);
         Paciente paciente = prontuario.getPaciente();
-        //prontuario.setMedico(SecurityContextHolder.getContext().getAuthentication().getName());
+        // prontuario.setMedico(SecurityContextHolder.getContext().getAuthentication().getName());
         paciente.setProntuario(prontuario);
         pacienteRepository.save(paciente);
         ra.addFlashAttribute("sucesso", "Prontuário cadastrado com sucesso!");
