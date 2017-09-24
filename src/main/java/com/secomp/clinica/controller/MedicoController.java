@@ -56,4 +56,11 @@ public class MedicoController {
         return "/paciente/list";
     }
 
+    @GetMapping("/{id}")
+    public String update(Model model, @PathVariable Integer id) {
+        model.addAttribute("paciente", pacienteRepository.findOne(id));
+        model.addAttribute("update", true);
+        return "/paciente/cadastro";
+    }
+
 }

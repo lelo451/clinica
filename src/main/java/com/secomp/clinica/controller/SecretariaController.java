@@ -53,24 +53,24 @@ public class SecretariaController {
     public String cadastro(Model model) {
         model.addAttribute("update", false);
         model.addAttribute("paciente", new Paciente());
-        return "secretaria/paciente/cadastro";
+        return "/paciente/cadastro";
     }
 
     @PostMapping
     public String salvar(@Valid Paciente paciente, BindingResult br, RedirectAttributes ra) {
         if(br.hasErrors()) {
-            return "secretaria/paciente/cadastro";
+            return "/paciente/cadastro";
         }
         if(paciente.getCpf() == null) {
             br.rejectValue("cpf", null, "O CPF informado já está cadastrado");
-            return "secretaria/paciente/cadastro";
+            return "/paciente/cadastro";
         } else {
             try {
                 pacienteRepository.save(paciente);
             } catch (DataIntegrityViolationException e) {
                 br.rejectValue("cpf", null, "O CPF informado já está cadastrado!");
                 paciente.setCpf(null);
-                return "secretaria/paciente/cadastro";
+                return "/paciente/cadastro";
             }
             ra.addFlashAttribute("sucesso", "Paciente cadastrado com sucesso!");
             return "redirect:/secretaria";
@@ -80,7 +80,7 @@ public class SecretariaController {
     @GetMapping("/list")
     public String listar(Model model) {
         model.addAttribute("pacientes", pacienteRepository.findAll());
-        return "secretaria/paciente/list";
+        return "/paciente/list";
     }
 
     @GetMapping("/listConsulta")
@@ -93,7 +93,7 @@ public class SecretariaController {
     public String update(Model model, @PathVariable Integer id) {
         model.addAttribute("paciente", pacienteRepository.findOne(id));
         model.addAttribute("update", true);
-        return "secretaria/paciente/cadastro";
+        return "/paciente/cadastro";
     }
 
     @PostMapping("/{id}")

@@ -7,7 +7,7 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom-lista">
-        <a class="navbar-brand" th:href="@{/secretaria}">
+        <a class="navbar-brand" th:href="@{/medico}">
             <img th:src="@{/img/man.png}" alt="Saúde e Cia" width="30"/>
             <span>Lista de Pacientes</span>
         </a>
@@ -22,12 +22,6 @@
                     <a class="nav-link" th:href="@{/}">Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Médico</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/secretaria}">Secretária</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Notificações</a>
                 </li>
             </ul>
@@ -38,11 +32,9 @@
     <div class="row">
         <div class="col-12">
             <div class="card border-warning mb-3">
-                <div class="card-header">Menu da Secretária</div>
-                <div class="card-body text-warning">
+               <div class="card-body text-warning">
                     <h4 class="card-title">Lista de pacientes</h4>
-                    <p class="card-text">Abaixo é exibido a lista de todos os pacientes cadastrados no sistema.<br/>É
-                        possível editá-los ou excluí-los</p>
+                    <p class="card-text">Abaixo é exibido a lista de todos os pacientes cadastrados no sistema.<br/></p>
                     <br/>
                     <table class="table table-bordered table-striped table-sm table-responsive">
                         <thead>
@@ -52,8 +44,8 @@
                             <th>Data de Nascimento</th>
                             <th>Visualizar</th>
                             <th>Editar</th>
-                            <th>Agendar Consulta</th>
                             <th>Excluir</th>
+                            <th>Prescrição</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,7 +53,12 @@
                             <td th:text="${paciente.cpf}"></td>
                             <td th:text="${paciente.nome}"></td>
                             <td th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></td>
-                            <td></td>
+                           <td>
+                                <a class="btn btn-link btn-xs" th:href="@{'/medico/' + ${paciente.id} }" title="Visualizar" rel="tooltip"
+                                   data-placement="top">
+                                    <img th:src="@{/img/love.png}" width="40" height="40"/>
+                                </a>
+                           </td>
                             <td>
                                 <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
                                    data-placement="top">
@@ -75,7 +72,13 @@
                                     <img th:src="@{/img/dead.png}" width="40" height="40"/>
                                 </a>
                             </td>
-                        </tr>
+                            <td>
+                                <a class="btn btn-link btn-xs" th:href="@{'/medico/prescricao/' + ${paciente.id} }" title="Visualizar" rel="tooltip"
+                                   data-placement="top">
+                                    <img th:src="@{/img/love.png}" width="40" height="40"/>
+                                </a>
+                            </td>
+                           </tr>
                         </tbody>
                     </table>
                 </div>
