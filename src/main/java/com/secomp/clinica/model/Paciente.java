@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -47,6 +48,9 @@ public class Paciente {
     @NotEmpty
     @Size(max = 50)
     private String cidade;
+
+    @OneToOne
+    private Prontuario prontuario;
 
     public Integer getId() {
         return id;
@@ -126,6 +130,14 @@ public class Paciente {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
+    }
+
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
     }
 
     @Override

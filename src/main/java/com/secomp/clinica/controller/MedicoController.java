@@ -1,6 +1,7 @@
 package com.secomp.clinica.controller;
 
 import com.secomp.clinica.model.Consulta;
+import com.secomp.clinica.model.Prontuario;
 import com.secomp.clinica.model.Usuario;
 import com.secomp.clinica.model.enums.Role;
 import com.secomp.clinica.repository.ConsultaRepository;
@@ -54,6 +55,14 @@ public class MedicoController {
     public String listar(Model model) {
         model.addAttribute("pacientes", pacienteRepository.findAll());
         return "/paciente/list";
+    }
+
+    @GetMapping("/prontuario/{id}")
+    public String prontuario(Model model, @PathVariable Integer id) {
+        Prontuario prontuario = pacienteRepository.findOne(id).getProntuario();
+        model.addAttribute("prontuario", prontuario);
+        model.addAttribute("update", prontuario!=null);
+       return "/paciente/prontuario";
     }
 
     @GetMapping("/{id}")

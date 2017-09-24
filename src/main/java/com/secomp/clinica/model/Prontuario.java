@@ -1,6 +1,7 @@
 package com.secomp.clinica.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -8,37 +9,17 @@ public class Prontuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "prontuario_id")
     private Integer id;
 
-    @Column(name = "prontuario_medico")
+    @Size(max = 50)
     private String medico;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "prontuario_data_consulta")
-    private Date data_consulta;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "prontuario_sintomas")
-    private String sintomas;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "prontuario_diagnostico")
+    @Size(max = 50)
     private String diagnostico;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "prontuario_receita")
-    private String receita;
-
-    @Column(name = "prontuario_assinatura")
-    private String assinatura;
-
-    @ManyToOne
-    @JoinColumn(name = "prontuario_usuario_id")
-    private Usuario usuario;
+    @OneToOne
+    @JoinColumn(name = "prontuario_paciente")
+    private Paciente paciente;
 
     public Integer getId() {
         return id;
@@ -46,30 +27,6 @@ public class Prontuario {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getMedico() {
-        return medico;
-    }
-
-    public void setMedico(String medico) {
-        this.medico = medico;
-    }
-
-    public Date getData_consulta() {
-        return data_consulta;
-    }
-
-    public void setData_consulta(Date data_consulta) {
-        this.data_consulta = data_consulta;
-    }
-
-    public String getSintomas() {
-        return sintomas;
-    }
-
-    public void setSintomas(String sintomas) {
-        this.sintomas = sintomas;
     }
 
     public String getDiagnostico() {
@@ -80,28 +37,22 @@ public class Prontuario {
         this.diagnostico = diagnostico;
     }
 
-    public String getReceita() {
-        return receita;
+    public String getMedico() {
+
+        return medico;
     }
 
-    public void setReceita(String receita) {
-        this.receita = receita;
+    public void setMedico(String medico) {
+        this.medico = medico;
     }
 
-    public String getAssinatura() {
-        return assinatura;
+    public Paciente getPaciente() {
+
+        return paciente;
     }
 
-    public void setAssinatura(String assinatura) {
-        this.assinatura = assinatura;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     @Override

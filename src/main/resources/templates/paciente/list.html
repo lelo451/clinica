@@ -44,7 +44,7 @@
                             <th>Data de Nascimento</th>
                             <div sec:authorize="hasRole('ROLE_MEDICO')">
                                 <th>Visualizar</th>
-                                <th>Prescrição</th>
+                                <th>Prontuário</th>
                             </div>
                             <div sec:authorize="hasRole('ROLE_SECRETARIA')">
                             <th>Editar</th>
@@ -79,7 +79,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                <a class="btn btn-link btn-xs" th:href="@{'/medico/prescricao/' + ${paciente.id} }" title="Prescrição" rel="tooltip"
+                                <a class="btn btn-link btn-xs" th:href="@{'/medico/prontuario/' + ${paciente.id} }" title="Prontuário" rel="tooltip"
                                    data-placement="top">
                                     <img th:src="@{/img/medical-records.png}" width="40" height="40"/>
                                 </a>
