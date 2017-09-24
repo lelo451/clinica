@@ -40,52 +40,61 @@
                           th:object="${paciente}">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="nome" class="col-form-label">Nome Completo<span class="obrigatorio">*</span> </label>
+                                <label for="nome" class="col-form-label">Nome Completo<span class="obrigatorio">*</span>
+                                </label>
                                 <input id="nome" class="form-control" placeholder="Digite o nome completo" type="text"
-                                       th:field="*{nome}" required="required" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"/>
+                                       th:field="*{nome}" required="required"
+                                       th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="cpf" class="col-form-label">CPF<span class="obrigatorio">*</span></label>
                                 <input id="cpf" class="form-control" placeholder="Digite o CPF" type="text"
-                                       th:field="*{cpf}" th:readonly="${update} == true ? 'readonly' : false" required="required" th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'"/>
-                                <div th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="invalid-feedback"></div>
+                                       th:field="*{cpf}" th:readonly="${update} == true ? 'readonly' : false"
+                                       required="required" th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'"/>
+                                <div th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="dataNascimento" class="col-form-label">Data de nascimento<span class="obrigatorio">*</span></label>
+                                <label for="dataNascimento" class="col-form-label">Data de nascimento<span
+                                        class="obrigatorio">*</span></label>
                                 <input id="dataNascimento" type="text" class="form-control" th:field="*{dataNascimento}"
-                                       placeholder="dd/mm/yyyy" required="required" th:classappend="${#fields.hasErrors('dataNascimento')} ? 'is-invalid'"/>
+                                       placeholder="dd/mm/yyyy" required="required"
+                                       th:classappend="${#fields.hasErrors('dataNascimento')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-12">
                                 <label for="endereco" class="col-form-label">Endereço<span class="obrigatorio">*</span></label>
                                 <input id="endereco" type="text" class="form-control" placeholder="Endereço, Nro"
-                                       th:field="*{endereco}" required="required" th:classappend="${#fields.hasErrors('endereco')} ? 'is-invalid'"/>
+                                       th:field="*{endereco}" required="required"
+                                       th:classappend="${#fields.hasErrors('endereco')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-12">
                                 <label for="complemento" class="col-form-label">Complemento</label>
                                 <input id="complemento" type="text" class="form-control"
                                        placeholder="Apartmento, casa, andar" th:field="*{complemento}"/>
                                 <div th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-4">
                                 <label for="telefone" class="col-form-label">Telefone</label>
                                 <input id="telefone" type="text" class="form-control" placeholder="Digite o telefone"
-                                       th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'"/>
+                                       th:field="*{telefone}"
+                                       th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-4">
                                 <label for="email" class="col-form-label">Email</label>
                                 <input id="email" type="email" class="form-control" placeholder="Digite o email"
-                                       th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
+                                       th:field="*{email}"
+                                       th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-4">
                                 <label class="col-form-label">Estado<span class="obrigatorio">*</span></label>
@@ -96,18 +105,29 @@
                                 </select>
                             </div>
                             <div class="form-group col-12">
-                                <label for="cidade" class="col-form-label">Cidade<span class="obrigatorio">*</span></label>
-                                <input id="cidade" type="text" class="form-control" required="required" placeholder="Digite a cidade"
-                                       th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'"/>
+                                <label for="cidade" class="col-form-label">Cidade<span
+                                        class="obrigatorio">*</span></label>
+                                <input id="cidade" type="text" class="form-control" required="required"
+                                       placeholder="Digite a cidade"
+                                       th:field="*{cidade}"
+                                       th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'"/>
                                 <div th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}"
-                                      class="invalid-feedback"></div>
+                                     class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div th:if="${!visualizar}">
-                        <button type="submit" class="btn btn-primary" th:text="${update} == true ? 'Atualizar' : 'Cadastrar'"></button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                            Cancelar
-                        </button>
+                            <button type="submit" class="btn btn-primary"
+                                    th:text="${update} == true ? 'Atualizar' : 'Cadastrar'"></button>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                                Cancelar
+                            </button>
+                        </div>
+                        <div th:if="${visualizar}">
+                            <a th:href="@{/medico/list}">
+                                <button type="button" class="btn btn-dark">
+                                    Voltar
+                                </button>
+                            </a>
                         </div>
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -115,12 +135,14 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" th:text="${update} == true ? 'Cancelar Atualização' : 'Cancelar Cadastro'"></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel"
+                                            th:text="${update} == true ? 'Cancelar Atualização' : 'Cancelar Cadastro'"></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body" th:text="${update} == true ? 'Tem certeza que deseja cancelar a atualização do paciente?' : 'Tem certeza que deseja cancelar o cadastro de paciente?'">
+                                    <div class="modal-body"
+                                         th:text="${update} == true ? 'Tem certeza que deseja cancelar a atualização do paciente?' : 'Tem certeza que deseja cancelar o cadastro de paciente?'">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Não
@@ -145,7 +167,7 @@
         $('#dataNascimento').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#telefone').mask('(00) 0000-00000').keyup(function () {
             var size = $(this).val().length;
-            if(size > 14)
+            if (size > 14)
                 $(this).mask('(00) 00000-0000')
         });
     });

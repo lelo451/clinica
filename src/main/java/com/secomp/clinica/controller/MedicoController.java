@@ -63,8 +63,9 @@ public class MedicoController {
         if (prontuario == null) {
             prontuario = new Prontuario(paciente);
         }
+
         model.addAttribute("prontuario", prontuario);
-        model.addAttribute("update", prontuario != null);
+        model.addAttribute("update", prontuario.getMedico() != null);
         return "/paciente/prontuario";
     }
 
@@ -80,9 +81,8 @@ public class MedicoController {
         if (br.hasErrors()) {
             return "/paciente/prontuario";
         }
-        System.out.println(prontuario);
-        Paciente paciente = prontuario.getPaciente();
-        // prontuario.setMedico(SecurityContextHolder.getContext().getAuthentication().getName());
+        Paciente paciente =  pacienteRepository.getOne(prontuario.getPaciente().getId());
+        prontuario.setMedico(SecurityContextHolder.getContext().getAuthentication().getName());
         paciente.setProntuario(prontuario);
         pacienteRepository.save(paciente);
         ra.addFlashAttribute("sucesso", "Prontuário cadastrado com sucesso!");
