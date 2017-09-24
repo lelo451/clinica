@@ -7,7 +7,7 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom-lista">
-        <a class="navbar-brand" th:href="@{/medico}">
+        <a class="navbar-brand" th:href="@{/redirectTipoUsuario}">
             <img th:src="@{/img/man.png}" alt="Saúde e Cia" width="30"/>
             <span>Lista de Pacientes</span>
         </a>
@@ -42,10 +42,14 @@
                             <th>CPF</th>
                             <th>Nome</th>
                             <th>Data de Nascimento</th>
-                            <th>Visualizar</th>
+                            <div sec:authorize="hasRole('ROLE_MEDICO')">
+                                <th>Visualizar</th>
+                                <th>Prescrição</th>
+                            </div>
+                            <div sec:authorize="hasRole('ROLE_SECRETARIA')">
                             <th>Editar</th>
                             <th>Excluir</th>
-                            <th>Prescrição</th>
+                            </div>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,31 +57,34 @@
                             <td th:text="${paciente.cpf}"></td>
                             <td th:text="${paciente.nome}"></td>
                             <td th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></td>
-                           <td>
-                                <a class="btn btn-link btn-xs" th:href="@{'/medico/' + ${paciente.id} }" title="Visualizar" rel="tooltip"
-                                   data-placement="top">
-                                    <img th:src="@{/img/love.png}" width="40" height="40"/>
-                                </a>
-                           </td>
-                            <td>
-                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
-                                   data-placement="top">
-                                    <img th:src="@{/img/love.png}" width="40" height="40"/>
-                                </a>
-                            </td>
-                            <td></td>
+                        <div sec:authorize="hasRole('ROLE_SECRETARIA')">
+                                <td>
+                                    <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
+                                       data-placement="top">
+                                        <img th:src="@{/img/analytics.png}" width="40" height="40"/>
+                                    </a>
+                                </td>
                             <td class="text-center">
                                 <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Excluir" rel="tooltip"
                                    data-placement="top">
-                                    <img th:src="@{/img/dead.png}" width="40" height="40"/>
+                                    <img th:src="@{/img/file.png}" width="40" height="40"/>
                                 </a>
                             </td>
-                            <td>
-                                <a class="btn btn-link btn-xs" th:href="@{'/medico/prescricao/' + ${paciente.id} }" title="Visualizar" rel="tooltip"
+                            </div>
+                            <div sec:authorize="hasRole('ROLE_MEDICO')">
+                                <td>
+                                    <a class="btn btn-link btn-xs" th:href="@{'/medico/' + ${paciente.id} }" title="Visualizar" rel="tooltip"
+                                       data-placement="top">
+                                        <img th:src="@{/img/search.png}" width="40" height="40"/>
+                                    </a>
+                                </td>
+                                <td>
+                                <a class="btn btn-link btn-xs" th:href="@{'/medico/prescricao/' + ${paciente.id} }" title="Prescrição" rel="tooltip"
                                    data-placement="top">
-                                    <img th:src="@{/img/love.png}" width="40" height="40"/>
+                                    <img th:src="@{/img/medical-records.png}" width="40" height="40"/>
                                 </a>
                             </td>
+                            </div>
                            </tr>
                         </tbody>
                     </table>

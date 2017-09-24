@@ -52,6 +52,7 @@ public class SecretariaController {
     @GetMapping("/novo")
     public String cadastro(Model model) {
         model.addAttribute("update", false);
+        model.addAttribute("visualizar", false);
         model.addAttribute("paciente", new Paciente());
         return "/paciente/cadastro";
     }
@@ -92,6 +93,7 @@ public class SecretariaController {
     @GetMapping("/{id}")
     public String update(Model model, @PathVariable Integer id) {
         model.addAttribute("paciente", pacienteRepository.findOne(id));
+        model.addAttribute("visualizar", false);
         model.addAttribute("update", true);
         return "/paciente/cadastro";
     }

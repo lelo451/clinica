@@ -16,7 +16,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/sucesso")
+    @GetMapping("/redirectTipoUsuario")
     public String users() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();

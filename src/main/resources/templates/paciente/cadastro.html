@@ -6,10 +6,10 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <a class="navbar-brand" th:href="@{/secretaria}">
-            <img th:src="@{/img/princess-leia.png}" alt="Saúde e Cia" width="30"/>
-            <span>Secretária</span>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom-lista">
+        <a class="navbar-brand" th:href="@{/redirectTipoUsuario}">
+            <img th:src="@{/img/man.png}" alt="Saúde e Cia" width="30"/>
+            <span>Lista de Pacientes</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#mobile-menu"
@@ -20,9 +20,6 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Médico</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Notificações</a>
@@ -106,10 +103,12 @@
                                       class="invalid-feedback"></div>
                             </div>
                         </div>
+                        <div th:if="${!visualizar}">
                         <button type="submit" class="btn btn-primary" th:text="${update} == true ? 'Atualizar' : 'Cadastrar'"></button>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
                             Cancelar
                         </button>
+                        </div>
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
