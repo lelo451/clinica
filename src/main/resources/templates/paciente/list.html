@@ -16,23 +16,13 @@
                 aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="mobile-menu">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notificações</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+      </nav>
 </header>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card border-warning mb-3">
-               <div class="card-body text-warning">
+                <div class="card-body text-warning">
                     <h4 class="card-title">Lista de pacientes</h4>
                     <p class="card-text">Abaixo é exibido a lista de todos os pacientes cadastrados no sistema.<br/></p>
                     <br/>
@@ -47,8 +37,8 @@
                                 <th>Prontuário</th>
                             </div>
                             <div sec:authorize="hasRole('ROLE_SECRETARIA')">
-                            <th>Editar</th>
-                            <th>Excluir</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
                             </div>
                         </tr>
                         </thead>
@@ -57,35 +47,39 @@
                             <td th:text="${paciente.cpf}"></td>
                             <td th:text="${paciente.nome}"></td>
                             <td th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></td>
-                        <div sec:authorize="hasRole('ROLE_SECRETARIA')">
+                            <div sec:authorize="hasRole('ROLE_SECRETARIA')">
                                 <td>
-                                    <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
+                                    <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }"
+                                       title="Editar" rel="tooltip"
                                        data-placement="top">
                                         <img th:src="@{/img/analytics.png}" width="40" height="40"/>
                                     </a>
                                 </td>
-                            <td class="text-center">
-                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Excluir" rel="tooltip"
-                                   data-placement="top">
-                                    <img th:src="@{/img/file.png}" width="40" height="40"/>
-                                </a>
-                            </td>
+                                <td class="text-center">
+                                    <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }"
+                                       title="Excluir" rel="tooltip"
+                                       data-placement="top">
+                                        <img th:src="@{/img/file.png}" width="40" height="40"/>
+                                    </a>
+                                </td>
                             </div>
                             <div sec:authorize="hasRole('ROLE_MEDICO')">
                                 <td>
-                                    <a class="btn btn-link btn-xs" th:href="@{'/medico/' + ${paciente.id} }" title="Visualizar" rel="tooltip"
+                                    <a class="btn btn-link btn-xs" th:href="@{'/medico/' + ${paciente.id} }"
+                                       title="Visualizar" rel="tooltip"
                                        data-placement="top">
                                         <img th:src="@{/img/search.png}" width="40" height="40"/>
                                     </a>
                                 </td>
                                 <td>
-                                <a class="btn btn-link btn-xs" th:href="@{'/medico/prontuario/' + ${paciente.id} }" title="Prontuário" rel="tooltip"
-                                   data-placement="top">
-                                    <img th:src="@{/img/medical-records.png}" width="40" height="40"/>
-                                </a>
-                            </td>
+                                    <a class="btn btn-link btn-xs" th:href="@{'/medico/prontuario/' + ${paciente.id} }"
+                                       title="Prontuário" rel="tooltip"
+                                       data-placement="top">
+                                        <img th:src="@{/img/medical-records.png}" width="40" height="40"/>
+                                    </a>
+                                </td>
                             </div>
-                           </tr>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

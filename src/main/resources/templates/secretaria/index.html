@@ -19,16 +19,7 @@
         <div class="collapse navbar-collapse" id="mobile-menu">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Médico</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notificações</a>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-link">Logado como: <span sec:authentication="name"></span></span>
+                    <span class="nav-link">Usuário: <span sec:authentication="name"></span></span>
                 </li>
                 <li class="nav-item">
                     <div hidden="hidden">
@@ -75,14 +66,14 @@
                             <div class="container">
                                 <ul class="nav text-center">
                                     <li class="nav-item col-6 secretaria-menu">
-                                        <img th:src="@{/img/happy.png}" height="128" width="128"/>
+                                        <img th:src="@{/img/report-add.png}" height="96" width="96"/>
                                         <br/>
                                         <a th:href="@{/secretaria/novo}">
                                             <button type="button" class="btn btn-dark">Cadastrar Paciente</button>
                                         </a>
                                     </li>
                                     <li class="nav-item col-6 secretaria-menu">
-                                        <img th:src="@{/img/wink.png}" height="128" width="128"/>
+                                        <img th:src="@{/img/report.png}" height="96" width="96"/>
                                         <br/>
                                         <a th:href="@{secretaria/list}">
                                             <button type="button" class="btn btn-dark">Lista de Pacientes</button>
@@ -102,14 +93,15 @@
                             <div class="container">
                                 <ul class="nav text-center">
                                     <li class="nav-item  col-6 secretaria-menu">
-                                        <img th:src="@{/img/clipboard.png}" height="128" width="128"/>
+                                        <img th:src="@{/img/clipboard.png}" height="96" width="96"/>
                                         <br/>
                                         <a th:href="@{/secretaria/list}" class="btn btn-dark">Agendar Consulta</a>
                                     </li>
                                     <li class="nav-item col-6 secretaria-menu">
-                                        <img th:src="@{/img/analytics.png}" height="128" width="128"/>
+                                        <img th:src="@{/img/analytics.png}" height="96" width="96"/>
                                         <br/>
-                                        <a th:href="@{/secretaria/listConsulta}" class="btn btn-dark">Listar Consultas</a>
+                                        <a th:href="@{/secretaria/listConsulta}" class="btn btn-dark">Listar
+                                            Consultas</a>
                                     </li>
                                 </ul>
                             </div>

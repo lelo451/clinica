@@ -21,9 +21,6 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/}">Início</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notificações</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -48,7 +45,8 @@
                           th:object="${consulta}">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="dataConsulta" class="col-form-label">Data da Consulta<span class="obrigatorio">*</span></label>
+                                <label for="dataConsulta" class="col-form-label">Data da Consulta<span
+                                        class="obrigatorio">*</span></label>
                                 <input type="text" class="form-control" th:field="*{dataConsulta}"
                                        placeholder="dd/mm/yyyy" required="required"/>
                                 <div id="DataError" class="invalid-feedback"></div>
@@ -62,21 +60,25 @@
                                 </select>
                             </div>
                             <div class="form-group col-6">
-                                <label for="medico" class="col-form-label">Médico<span class="obrigatorio">*</span></label>
+                                <label for="medico" class="col-form-label">Médico<span
+                                        class="obrigatorio">*</span></label>
                                 <select class="form-control" th:field="*{medico}" required="required">
                                     <option value="">Selecione o Médico</option>
-                                    <option th:each="medico : ${medicos}" th:value="${medico.nome}" th:text="${medico.nome}"></option>
+                                    <option th:each="medico : ${medicos}" th:value="${medico.nome}"
+                                            th:text="${medico.nome}"></option>
                                 </select>
                                 <div id="medicoError" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group col-6">
-                                <label for="hora" class="col-form-label">Horário<span class="obrigatorio">*</span></label>
+                                <label for="hora" class="col-form-label">Horário<span
+                                        class="obrigatorio">*</span></label>
                                 <select class="form-control" th:field="*{hora}" required="required">
                                     <option value="">Selecione o Médico</option>
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" id="btnsubmit" class="btn btn-primary" th:text="${update} == true ? 'Atualizar Consulta' : 'Agendar Consulta'"></button>
+                        <button type="submit" id="btnsubmit" class="btn btn-primary"
+                                th:text="${update} == true ? 'Atualizar Consulta' : 'Agendar Consulta'"></button>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
                             Cancelar
                         </button>
@@ -86,12 +88,14 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" th:text="${update} == true ? 'Editar Consulta' : 'Cancelar Consulta'"></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel"
+                                            th:text="${update} == true ? 'Editar Consulta' : 'Cancelar Consulta'"></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body" th:text="${update} == true ? 'Tem certeza que deseja cancelar a edição da consulta?' : 'Tem certeza que deseja cancelar a consulta?'">
+                                    <div class="modal-body"
+                                         th:text="${update} == true ? 'Tem certeza que deseja cancelar a edição da consulta?' : 'Tem certeza que deseja cancelar a consulta?'">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Não
@@ -122,7 +126,7 @@
     $('#dataConsulta').change(function () {
         var today = getToday();
         var consulta = $(this).val();
-        if(consulta >= today) {
+        if (consulta >= today) {
             $('#btnsubmit').attr('disabled', false);
             $(this).removeClass('is-invalid');
         } else {
@@ -143,7 +147,7 @@
                 var hora = $('#hora');
                 hora.find("option").remove();
                 var select = document.getElementById('hora');
-                if(!$.trim(data)) {
+                if (!$.trim(data)) {
                     var opt = document.createElement('option');
                     opt.value = "";
                     opt.innerHTML = "Nenhum horário disponivel";
@@ -166,42 +170,42 @@
         });
     });
     document.getElementById('medico').addEventListener('change', function () {
-            $.ajax({
-                type: "POST",
-                data: {
-                    medico: $('#medico').val(),
-                    data: $('#dataConsulta').val(),
-                    tipo_consulta: $('#tipoConsulta').val()
-                },
-                cache: false,
-                url: "/secretaria/horario",
-                success: function (data) {
-                    var hora = $('#hora');
-                    hora.find("option").remove();
-                    var select = document.getElementById('hora');
-                    if(!$.trim(data)) {
-                        var opt = document.createElement('option');
-                        opt.value = "";
-                        opt.innerHTML = "Nenhum horário disponivel";
-                        select.appendChild(opt);
-                    } else {
-                        $.each(data, function (key, value) {
-                            var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
-                            var opt = document.createElement('option');
-                            opt.value = time;
-                            opt.innerHTML = time;
-                            select.appendChild(opt);
-                        });
-                    }
-                }, error: function () {
+        $.ajax({
+            type: "POST",
+            data: {
+                medico: $('#medico').val(),
+                data: $('#dataConsulta').val(),
+                tipo_consulta: $('#tipoConsulta').val()
+            },
+            cache: false,
+            url: "/secretaria/horario",
+            success: function (data) {
+                var hora = $('#hora');
+                hora.find("option").remove();
+                var select = document.getElementById('hora');
+                if (!$.trim(data)) {
                     var opt = document.createElement('option');
                     opt.value = "";
-                    opt.innerHTML = "Digite o nome do medico";
+                    opt.innerHTML = "Nenhum horário disponivel";
                     select.appendChild(opt);
+                } else {
+                    $.each(data, function (key, value) {
+                        var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
+                        var opt = document.createElement('option');
+                        opt.value = time;
+                        opt.innerHTML = time;
+                        select.appendChild(opt);
+                    });
                 }
-            });
+            }, error: function () {
+                var opt = document.createElement('option');
+                opt.value = "";
+                opt.innerHTML = "Digite o nome do medico";
+                select.appendChild(opt);
+            }
+        });
     });
-/* ]]> */
+    /* ]]> */
 </script>
 </body>
 </html>

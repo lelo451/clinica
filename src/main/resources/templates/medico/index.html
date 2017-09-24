@@ -19,13 +19,7 @@
         <div class="collapse navbar-collapse" id="mobile-menu">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notificações</a>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-link">Logado como: <span sec:authentication="name"></span></span>
+                    <span class="nav-link">Usuário: <span sec:authentication="name"></span></span>
                 </li>
                 <li class="nav-item">
                     <div hidden="hidden">
@@ -53,7 +47,7 @@
                     <span th:text="${sucesso}"></span>
                 </div>
             </div>
-          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="card border-danger mb-3" style="max-width: 100%;">
                         <div class="card-header">Menu do Médico</div>
@@ -61,8 +55,8 @@
                             <h4 class="card-title">Clique sobre a opção desejada</h4>
                             <div class="container">
                                 <ul class="nav text-center">
-                                         <li class="nav-item col-12 medico-menu">
-                                        <img th:src="@{/img/wink.png}" height="128" width="128"/>
+                                    <li class="nav-item col-12 medico-menu">
+                                        <img th:src="@{/img/report.png}" height="96" width="96"/>
                                         <br/>
                                         <a th:href="@{/medico/list}">
                                             <button type="button" class="btn btn-dark">Lista de Pacientes</button>

@@ -27,9 +27,6 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/secretaria}">Secretária</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notificações</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -64,13 +61,15 @@
                             <td th:text="${consulta.medico}"></td>
                             <td th:text="${consulta.tipoConsulta}"></td>
                             <td>
-                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Editar" rel="tooltip"
+                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }"
+                                   title="Editar" rel="tooltip"
                                    data-placement="top">
                                     <img th:src="@{/img/love.png}" width="40" height="40"/>
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }" title="Excluir" rel="tooltip"
+                                <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }"
+                                   title="Excluir" rel="tooltip"
                                    data-placement="top">
                                     <img th:src="@{/img/dead.png}" width="40" height="40"/>
                                 </a>

@@ -16,16 +16,6 @@
                 aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="mobile-menu">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Início</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notificações</a>
-                </li>
-            </ul>
-        </div>
     </nav>
 </header>
 <div class="container">
@@ -147,7 +137,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Não
                                         </button>
-                                        <a th:href="@{/secretaria}">
+                                        <a th:href="@{/secretaria/list}">
                                             <button type="button" class="btn btn-primary">Sim</button>
                                         </a>
                                     </div>
