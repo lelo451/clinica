@@ -24,7 +24,7 @@ public class Consulta {
     private String medico;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 

@@ -121,59 +121,59 @@
                             <div style="clear: both"></div>
                         </div>
                     </form>
+                    <script>
+                        /* <![CDATA[ */
+                        $(document).ready(function () {
+                            $('#cpf').mask('000.000.000-00');
+                            $('#nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
+                            $('#telefone').mask('(00) 0000-00000').keyup(function () {
+                                var size = $(this).val().length;
+                                if(size > 14)
+                                    $(this).mask('(00) 00000-0000')
+                            });
+                        });
+                        $('#nascimento').datepicker({
+                            format: 'dd/mm/yyyy',
+                            autoclose: true,
+                            language: 'pt-BR'
+                        });
+                        $('#cpf').focusout(function () {
+                            var cpf = validaCPF();
+                            if(cpf) {
+                                $(this).removeClass('is-invalid');
+                                $('#btn-subimit').attr('disabled', false);
+                            } else {
+                                $(this).addClass('is-invalid');
+                                $('#CPFerror').text("CPF Inválido");
+                                $('#btn-subimit').attr('disabled',true);
+                            }
+                        });
+                        $('#username').focusout(function () {
+                            $.ajax({
+                                type: "POST",
+                                data: {
+                                    username: $(this).val()
+                                },
+                                cache: false,
+                                url: "/register/username",
+                                success: function (data) {
+                                    if(data) {
+                                        $('#username').removeClass('is-invalid');
+                                        $('#btn-submit').attr('disabled', false);
+                                    } else {
+                                        $('#btn-submit').attr('disabled', true);
+                                        $('#username').addClass('is-invalid');
+                                        $('#userErro').text("Usuário já está em uso");
+                                    }
+                                }
+                            });
+                        });
+                        /* ]]> */
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    /* <![CDATA[ */
-    $(document).ready(function () {
-        $('#cpf').mask('000.000.000-00');
-        $('#nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
-        $('#telefone').mask('(00) 0000-00000').keyup(function () {
-            var size = $(this).val().length;
-            if(size > 14)
-                $(this).mask('(00) 00000-0000')
-        });
-    });
-    $('#nascimento').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true,
-        language: 'pt-BR'
-    });
-    $('#cpf').focusout(function () {
-        var cpf = validaCPF();
-        if(cpf) {
-            $(this).removeClass('is-invalid');
-            $('#btn-subimit').attr('disabled', false);
-        } else {
-            $(this).addClass('is-invalid');
-            $('#CPFerror').text("CPF Inválido");
-            $('#btn-subimit').attr('disabled',true);
-        }
-    });
-    $('#username').focusout(function () {
-        $.ajax({
-            type: "POST",
-            data: {
-                username: $(this).val()
-            },
-            cache: false,
-            url: "/register/username",
-            success: function (data) {
-                if(data) {
-                    $('#username').removeClass('is-invalid');
-                    $('#btn-submit').attr('disabled', false);
-                } else {
-                    $('#btn-submit').attr('disabled', true);
-                    $('#username').addClass('is-invalid');
-                    $('#userErro').text("Usuário já está em uso");
-                }
-            }
-        });
-    });
-    /* ]]> */
-</script>
 </body>
 </html>

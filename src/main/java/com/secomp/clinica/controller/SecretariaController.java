@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,11 +40,13 @@ public class SecretariaController {
 
     private final PacienteRepository pacienteRepository;
     private final ConsultaRepository consultaRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public SecretariaController(PacienteRepository pacienteRepository, ConsultaRepository consultaRepository) {
+    public SecretariaController(PacienteRepository pacienteRepository, ConsultaRepository consultaRepository, UsuarioRepository usuarioRepository) {
         this.pacienteRepository = pacienteRepository;
         this.consultaRepository = consultaRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @GetMapping
@@ -115,26 +118,20 @@ public class SecretariaController {
         return horas;
     }
 
-    @GetMapping("/consulta")
-    public String novaConsulta(Model model) {
+    @GetMapping("/consulta/{id}")
+    public String novaConsulta(Model model, @PathVariable Integer id) {
         model.addAttribute("consulta", new Consulta());
+        model.addAttribute("medicos", usuarioRepository.findAllByRole(Role.ROLE_MEDICO));
+        model.addAttribute("pacienteID", id);
         return "secretaria/consulta/cadastro";
     }
 
     @PostMapping("/consulta")
-    public String saveConsulta(@Valid Consulta consulta, BindingResult br, RedirectAttributes ra, String cpf) {
-        System.out.println(cpf);
-        if(br.hasErrors()){
-            return "secretaria/consulta/cadastro";
-        }
-        Paciente paciente = pacienteRepository.findByCpf(cpf);
-        if(paciente != null) {
-            consulta.setPaciente(paciente);
-            consultaRepository.save(consulta);
-        } else {
-            ra.addFlashAttribute("erro", "O paciente deve estar cadastrado no sistema!");
-            return "secretaria/consulta/cadastro";
-        }
+    public String saveConsulta(Consulta consulta, RedirectAttributes ra, Integer pacienteID) {
+        Paciente paciente = pacienteRepository.findOne(pacienteID);
+        consulta.setPaciente(paciente);
+        paciente.setConsulta(consulta);
+        pacienteRepository.save(paciente);
         ra.addFlashAttribute("sucesso", "Consulta agendada com sucesso!");
         return "redirect:/secretaria";
     }

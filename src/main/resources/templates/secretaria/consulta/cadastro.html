@@ -41,8 +41,9 @@
                 <div class="card-body text-dark">
                     <h4 class="card-title">Digite as informações da Consulta</h4>
                     <form method="POST"
-                          th:action="@{${update} == true ? '/secretaria/consulta' + ${consulta.id} : '/secretaria/consulta'}"
+                          th:action="@{${update} == true ? '/secretaria/consulta' + ${consulta.id} + '/update' : '/secretaria/consulta'}"
                           th:object="${consulta}">
+                        <input type="hidden" id="pacienteID" name="pacienteID" th:value="${pacienteID}"/>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="dataConsulta" class="col-form-label">Data da Consulta<span

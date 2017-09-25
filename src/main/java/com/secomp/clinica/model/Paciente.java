@@ -52,6 +52,9 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     private Prontuario prontuario;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Consulta consulta;
+
     public Integer getId() {
         return id;
     }
@@ -138,6 +141,14 @@ public class Paciente {
 
     public void setProntuario(Prontuario prontuario) {
         this.prontuario = prontuario;
+    }
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 
     @Override

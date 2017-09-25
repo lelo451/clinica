@@ -1,14 +1,9 @@
 package com.secomp.clinica.controller;
 
-import com.secomp.clinica.model.Consulta;
 import com.secomp.clinica.model.Paciente;
 import com.secomp.clinica.model.Prontuario;
-import com.secomp.clinica.model.Usuario;
-import com.secomp.clinica.model.enums.Role;
-import com.secomp.clinica.repository.ConsultaRepository;
 import com.secomp.clinica.repository.PacienteRepository;
 import com.secomp.clinica.repository.UsuarioRepository;
-import com.secomp.clinica.util.Horario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
