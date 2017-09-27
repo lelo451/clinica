@@ -131,7 +131,7 @@ public class SecretariaController {
         Paciente paciente = pacienteRepository.findOne(pacienteID);
         consulta.setPaciente(paciente);
         consultaRepository.save(consulta);
-
+        paciente.addConsultas(consulta);
         pacienteRepository.save(paciente);
         ra.addFlashAttribute("sucesso", "Consulta agendada com sucesso!");
         return "redirect:/secretaria";
