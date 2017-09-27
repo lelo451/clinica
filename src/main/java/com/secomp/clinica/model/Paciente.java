@@ -7,7 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Paciente {
@@ -52,8 +54,8 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     private Prontuario prontuario;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Consulta consulta;
+    @OneToMany
+    private List<Consulta> consultas;
 
     public Integer getId() {
         return id;
@@ -143,12 +145,12 @@ public class Paciente {
         this.prontuario = prontuario;
     }
 
-    public Consulta getConsulta() {
-        return consulta;
+    public List<Consulta> getConsultas() {
+        return consultas;
     }
 
-    public void setConsulta(Consulta consulta) {
-        this.consulta = consulta;
+    public void setConsultas(List<Consulta> consultas) {
+        this.consultas = consultas;
     }
 
     @Override
@@ -164,5 +166,11 @@ public class Paciente {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    public void addConsultas(Consulta consulta) {
+        if(consultas==null)
+            consultas = new ArrayList<>();
+        consultas.add(consulta);
     }
 }

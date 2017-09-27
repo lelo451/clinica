@@ -130,7 +130,8 @@ public class SecretariaController {
     public String saveConsulta(Consulta consulta, RedirectAttributes ra, Integer pacienteID) {
         Paciente paciente = pacienteRepository.findOne(pacienteID);
         consulta.setPaciente(paciente);
-        paciente.setConsulta(consulta);
+        consultaRepository.save(consulta);
+
         pacienteRepository.save(paciente);
         ra.addFlashAttribute("sucesso", "Consulta agendada com sucesso!");
         return "redirect:/secretaria";
