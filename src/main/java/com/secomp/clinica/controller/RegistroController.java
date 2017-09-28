@@ -25,7 +25,7 @@ import java.util.Optional;
 public class RegistroController {
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    public void formataData(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
@@ -39,14 +39,14 @@ public class RegistroController {
     }
 
     @GetMapping
-    public String register_get(Model m) {
+    public String TelaDeCadastro(Model m) {
         m.addAttribute("usuario", new Usuario());
         return "register";
     }
 
     @PostMapping("/username")
     public @ResponseBody
-    Boolean exist(String username) {
+    Boolean VerificaSeUsernameExiste(String username) {
         Optional<Usuario> userOptional = ur.findByUsername(username);
         return !userOptional.isPresent();
     }
@@ -57,7 +57,7 @@ public class RegistroController {
     }
 
     @PostMapping
-    public String register_post(@Valid Usuario usuario, BindingResult br, String confirm, RedirectAttributes ra, Model m) {
+    public String PersiteUsuarioNoBancoDeDados(@Valid Usuario usuario, BindingResult br, String confirm, RedirectAttributes ra, Model m) {
         if(!usuario.getPassword().equals(confirm)) {
             m.addAttribute("usuario", usuario);
             ra.addFlashAttribute("erro", "As senhas devem ser iguais");

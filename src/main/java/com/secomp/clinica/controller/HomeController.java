@@ -17,7 +17,7 @@ public class HomeController {
     }
 
     @GetMapping("/redirectTipoUsuario")
-    public String users() {
+    public String verificaSeLoginEhSecretariaOuMedico() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
         role = role.replace("[", "");

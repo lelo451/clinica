@@ -25,7 +25,7 @@ import java.util.Date;
 public class MedicoController {
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    public void formataData(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
@@ -46,13 +46,13 @@ public class MedicoController {
     }
 
     @GetMapping("/list")
-    public String listar(Model model) {
+    public String listarPacientes(Model model) {
         model.addAttribute("pacientes", pacienteRepository.findAll());
-        return "/paciente/list";
+        return "paciente/list";
     }
 
     @GetMapping("/prontuario/{id}")
-    public String prontuario(Model model, @PathVariable Integer id) {
+    public String CadastraEAtualizaProntuario(Model model, @PathVariable Integer id) {
         Paciente paciente = pacienteRepository.findOne(id);
         Prontuario prontuario = paciente.getProntuario();
         if (prontuario == null) {
@@ -61,20 +61,20 @@ public class MedicoController {
 
         model.addAttribute("prontuario", prontuario);
         model.addAttribute("update", prontuario.getMedico() != null);
-        return "/paciente/prontuario";
+        return "paciente/prontuario";
     }
 
     @GetMapping("/{id}")
-    public String update(Model model, @PathVariable Integer id) {
+    public String visualizarInfoPaciente(Model model, @PathVariable Integer id) {
         model.addAttribute("paciente", pacienteRepository.findOne(id));
         model.addAttribute("visualizar", true);
-        return "/paciente/cadastro";
+        return "paciente/cadastro";
     }
 
     @PostMapping("/prontuario")
-    public String saveProntuario(@Valid Prontuario prontuario, BindingResult br, RedirectAttributes ra) {
+    public String persisteProntuarioNoBancoDeDados(@Valid Prontuario prontuario, BindingResult br, RedirectAttributes ra) {
         if (br.hasErrors()) {
-            return "/paciente/prontuario";
+            return "paciente/prontuario";
         }
         Paciente paciente =  pacienteRepository.getOne(prontuario.getPaciente().getId());
         prontuario.setMedico(SecurityContextHolder.getContext().getAuthentication().getName());
