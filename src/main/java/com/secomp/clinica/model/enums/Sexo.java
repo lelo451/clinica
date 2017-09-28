@@ -2,7 +2,7 @@ package com.secomp.clinica.model.enums;
 
 public enum Sexo {
 
-    M("Masculino"), F("Feminino"), OUTRO("Outro");
+    M("Masculino"), F("Feminino");
 
     private String sexo;
 

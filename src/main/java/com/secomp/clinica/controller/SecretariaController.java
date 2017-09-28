@@ -55,7 +55,7 @@ public class SecretariaController {
     }
 
     @GetMapping("/novo")
-    public String TelaDeCadastroDePaciente(Model model) {
+    public String abreTelaDeCadastroDePaciente(Model model) {
         model.addAttribute("update", false);
         model.addAttribute("visualizar", false);
         model.addAttribute("paciente", new Paciente());
@@ -63,7 +63,7 @@ public class SecretariaController {
     }
 
     @PostMapping
-    public String PersistePacienteNoBancoDeDados(@Valid Paciente paciente, BindingResult br, RedirectAttributes ra) {
+    public String persistePacienteNoBancoDeDados(@Valid Paciente paciente, BindingResult br, RedirectAttributes ra) {
         if(br.hasErrors()) {
             return "paciente/cadastro";
         }
@@ -84,19 +84,19 @@ public class SecretariaController {
     }
 
     @GetMapping("/list")
-    public String listarPacientes(Model model) {
+    public String listaPacientes(Model model) {
         model.addAttribute("pacientes", pacienteRepository.findAll());
         return "paciente/list";
     }
 
     @GetMapping("/listConsulta")
-    public String listarConsultas(Model model) {
+    public String listaConsultas(Model model) {
         model.addAttribute("consultas", consultaRepository.findAll());
         return "secretaria/consulta/list";
     }
 
     @GetMapping("/{id}")
-    public String TelaDeAtualizacaoDePaciente(Model model, @PathVariable Integer id) {
+    public String abreTelaDeAtualizacaoDePaciente(Model model, @PathVariable Integer id) {
         model.addAttribute("paciente", pacienteRepository.findOne(id));
         model.addAttribute("visualizar", false);
         model.addAttribute("update", true);
@@ -104,14 +104,14 @@ public class SecretariaController {
     }
 
     @PostMapping("/{id}")
-    public String AtualizaPacienteNoBancoDeDados(Paciente paciente, RedirectAttributes ra) {
+    public String atualizaPacienteNoBancoDeDados(Paciente paciente, RedirectAttributes ra) {
         pacienteRepository.save(paciente);
         ra.addFlashAttribute("sucesso", "Paciente " + paciente.getNome() + " atualizado com sucesso!");
         return "redirect:/secretaria/list";
     }
 
     @PostMapping("/horario")
-    public @ResponseBody Iterable<String> listaDeHorariosDisponiveis(Date data, String medico, String tipo_consulta) {
+    public @ResponseBody Iterable<String> listaHorariosDisponiveis(Date data, String medico, String tipo_consulta) {
         LocalTime agora = LocalTime.now();
         Horario horarios = new Horario(consultaRepository);
         List horas = horarios.horariosDisponiveis(data,tipo_consulta, medico, agora);
@@ -119,7 +119,7 @@ public class SecretariaController {
     }
 
     @GetMapping("/consulta/{id}")
-    public String TelaDeNovaConsulta(Model model, @PathVariable Integer id) {
+    public String abreTelaDeNovaConsulta(Model model, @PathVariable Integer id) {
         model.addAttribute("consulta", new Consulta());
         model.addAttribute("medicos", usuarioRepository.findAllByRole(Role.ROLE_MEDICO));
         model.addAttribute("pacienteID", id);
@@ -127,7 +127,7 @@ public class SecretariaController {
     }
 
     @PostMapping("/consulta")
-    public String PersisteConsultaNoBancoDeDados(Consulta consulta, RedirectAttributes ra, Integer pacienteID) {
+    public String persisteConsultaNoBancoDeDados(Consulta consulta, RedirectAttributes ra, Integer pacienteID) {
         Paciente paciente = pacienteRepository.findOne(pacienteID);
         consulta.setPaciente(paciente);
         consultaRepository.save(consulta);

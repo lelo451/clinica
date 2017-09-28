@@ -46,13 +46,13 @@ public class MedicoController {
     }
 
     @GetMapping("/list")
-    public String listarPacientes(Model model) {
+    public String listaPacientes(Model model) {
         model.addAttribute("pacientes", pacienteRepository.findAll());
         return "paciente/list";
     }
 
     @GetMapping("/prontuario/{id}")
-    public String CadastraEAtualizaProntuario(Model model, @PathVariable Integer id) {
+    public String cadastraEAtualizaProntuario(Model model, @PathVariable Integer id) {
         Paciente paciente = pacienteRepository.findOne(id);
         Prontuario prontuario = paciente.getProntuario();
         if (prontuario == null) {
@@ -65,7 +65,7 @@ public class MedicoController {
     }
 
     @GetMapping("/{id}")
-    public String visualizarInfoPaciente(Model model, @PathVariable Integer id) {
+    public String visualizaInfoPaciente(Model model, @PathVariable Integer id) {
         model.addAttribute("paciente", pacienteRepository.findOne(id));
         model.addAttribute("visualizar", true);
         return "paciente/cadastro";

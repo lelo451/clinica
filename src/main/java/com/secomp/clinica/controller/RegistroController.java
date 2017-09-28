@@ -39,14 +39,14 @@ public class RegistroController {
     }
 
     @GetMapping
-    public String TelaDeCadastro(Model m) {
+    public String abreTelaDeCadastro(Model m) {
         m.addAttribute("usuario", new Usuario());
         return "register";
     }
 
     @PostMapping("/username")
     public @ResponseBody
-    Boolean VerificaSeUsernameExiste(String username) {
+    Boolean verificaSeUsernameExiste(String username) {
         Optional<Usuario> userOptional = ur.findByUsername(username);
         return !userOptional.isPresent();
     }
@@ -57,7 +57,7 @@ public class RegistroController {
     }
 
     @PostMapping
-    public String PersiteUsuarioNoBancoDeDados(@Valid Usuario usuario, BindingResult br, String confirm, RedirectAttributes ra, Model m) {
+    public String persiteUsuarioNoBancoDeDados(@Valid Usuario usuario, BindingResult br, String confirm, RedirectAttributes ra, Model m) {
         usuario.setPassword(pe().encode(usuario.getPassword()));
         ur.save(usuario);
         ra.addFlashAttribute("sucesso", "Usuario " + usuario.getUsername() + " cadastrado com sucesso!");
