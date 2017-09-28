@@ -31,25 +31,8 @@ public class Paciente {
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
-    @NotEmpty
-    @Size(max = 90)
-    private String endereco;
-
-    @Size(max = 50)
-    private String complemento;
-
-    @Size(max = 50)
-    private String telefone;
-
-    @Size(max = 50)
-    private String email;
-
     @Enumerated(EnumType.STRING)
     private Estado estado;
-
-    @NotEmpty
-    @Size(max = 50)
-    private String cidade;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Prontuario prontuario;
@@ -89,52 +72,12 @@ public class Paciente {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Estado getEstado() {
         return estado;
     }
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
     public Prontuario getProntuario() {

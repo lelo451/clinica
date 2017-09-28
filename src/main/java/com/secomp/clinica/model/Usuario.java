@@ -32,12 +32,6 @@ public class Usuario {
     @Column(name = "usuario_sobrenome")
     private String sobrenome;
 
-    @Column(name = "usuario_endereco")
-    private String endereco;
-
-    @Column(name = "usuario_numero")
-    private Integer numero;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "usuario_sexo")
     private Sexo sexo;
@@ -53,15 +47,6 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "usuario_estado")
     private Estado estado;
-
-    @Column(name = "usuario_cidade")
-    private String cidade;
-
-    @Column(name = "usuario_email")
-    private String email;
-
-    @Column(name = "usuario_telefone")
-    private String telefone;
 
     public Integer getId() {
         return id;
@@ -111,22 +96,6 @@ public class Usuario {
         this.sobrenome = sobrenome;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
     public Sexo getSexo() {
         return sexo;
     }
@@ -157,30 +126,6 @@ public class Usuario {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     @Override

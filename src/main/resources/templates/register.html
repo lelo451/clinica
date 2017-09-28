@@ -34,14 +34,6 @@
                                 <label for="sobrenome">Sobrenome<span class="obrigatorio">*</span></label>
                                 <input class="form-control" type="text" th:field="*{sobrenome}" required="required"/>
                             </div>
-                            <div class="form-group col-12 col-lg-8">
-                                <label for="endereco">Endereco</label>
-                                <input class="form-control" type="text" th:field="*{endereco}"/>
-                            </div>
-                            <div class="form-group col-12 col-lg-4">
-                                <label for="numero">Número</label>
-                                <input class="form-control" type="text" th:field="*{numero}"/>
-                            </div>
                             <div class="form-group col-12 col-lg-6">
                                 <label>Sexo<span class="obrigatorio">*</span></label><br/>
                                 <div th:each="sexo : ${T(com.secomp.clinica.model.enums.Sexo).values()}" class="form-check form-check-inline">
@@ -73,27 +65,6 @@
                                 </select>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                                <label for="cidade" class="col-form-label">Cidade<span class="obrigatorio">*</span></label>
-                                <input id="cidade" type="text" class="form-control" required="required" placeholder="Digite a cidade"
-                                       th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'"/>
-                                <div th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}"
-                                     class="invalid-feedback"></div>
-                            </div>
-                            <div class="form-group col-12 col-lg-4">
-                                <label for="telefone" class="col-form-label">Telefone</label>
-                                <input id="telefone" type="text" class="form-control" placeholder="Digite o telefone"
-                                       th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'"/>
-                                <div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"
-                                     class="invalid-feedback"></div>
-                            </div>
-                            <div class="form-group col-12 col-lg-4">
-                                <label for="email" class="col-form-label">Email<span class="obrigatorio">*</span></label>
-                                <input id="email" type="email" class="form-control" placeholder="Digite o email"
-                                       th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'" required="required"/>
-                                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                                     class="invalid-feedback"></div>
-                            </div>
-                            <div class="form-group col-12 col-lg-4">
                                 <label for="role">Tipo de Usuário<span class="obrigatorio">*</span></label><br/>
                                 <div th:each="rl : ${T(com.secomp.clinica.model.enums.Role).values()}" class="form-check form-check-inline">
                                     <label class="form-check-label">
@@ -101,18 +72,14 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group col-12 col-lg-4">
+                            <div class="form-group col-12 col-lg-6">
                                 <label for="username">Username<span class="obrigatorio">*</span></label>
                                 <input class="form-control" type="text" th:field="*{username}" required="required"/>
                                 <span id="userErro" class="invalid-feedback" role="alert"></span>
                             </div>
-                            <div class="form-group col-12 col-lg-4">
+                            <div class="form-group col-12 col-lg-6">
                                 <label for="password">Password<span class="obrigatorio">*</span></label>
                                 <input class="form-control" type="password" th:field="*{password}" required="required"/>
-                            </div>
-                            <div class="form-group col-12 col-lg-4">
-                                <label for="confirm">Confirme seu password<span class="obrigatorio">*</span></label>
-                                <input class="form-control" type="password" id="confirm" name="confirm" value="" required="required"/>
                             </div>
                         </div>
                         <div class="form-group">

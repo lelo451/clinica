@@ -58,11 +58,6 @@ public class RegistroController {
 
     @PostMapping
     public String PersiteUsuarioNoBancoDeDados(@Valid Usuario usuario, BindingResult br, String confirm, RedirectAttributes ra, Model m) {
-        if(!usuario.getPassword().equals(confirm)) {
-            m.addAttribute("usuario", usuario);
-            ra.addFlashAttribute("erro", "As senhas devem ser iguais");
-            return "register";
-        }
         usuario.setPassword(pe().encode(usuario.getPassword()));
         ur.save(usuario);
         ra.addFlashAttribute("sucesso", "Usuario " + usuario.getUsername() + " cadastrado com sucesso!");
