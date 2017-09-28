@@ -18,12 +18,6 @@ public class Consulta {
     private Date dataConsulta;
 
     @NotNull
-    private String hora;
-
-    @NotNull
-    private String medico;
-
-    @NotNull
     @OneToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
@@ -45,22 +39,6 @@ public class Consulta {
 
     public void setDataConsulta(Date dataConsulta) {
         this.dataConsulta = dataConsulta;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
-    public String getMedico() {
-        return medico;
-    }
-
-    public void setMedico(String medico) {
-        this.medico = medico;
     }
 
     public Paciente getPaciente() {

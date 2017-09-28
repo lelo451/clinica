@@ -32,14 +32,9 @@
                             <th>CPF</th>
                             <th>Nome</th>
                             <th>Data de Nascimento</th>
-                            <div sec:authorize="hasRole('ROLE_MEDICO')">
-                                <th>Visualizar</th>
-                                <th>Prontuário</th>
-                            </div>
                             <div sec:authorize="hasRole('ROLE_SECRETARIA')">
                                 <th>Agendar Consulta</th>
                                 <th>Editar</th>
-                                <th>Excluir</th>
                             </div>
                         </tr>
                         </thead>
@@ -48,22 +43,6 @@
                             <td th:text="${paciente.cpf}"></td>
                             <td th:text="${paciente.nome}"></td>
                             <td th:text="${#dates.format(paciente.dataNascimento, 'dd/MM/yyyy')}"></td>
-                            <div sec:authorize="hasRole('ROLE_MEDICO')">
-                                <td>
-                                    <a class="btn btn-link btn-xs" th:href="@{'/medico/' + ${paciente.id} }"
-                                       title="Visualizar" rel="tooltip"
-                                       data-placement="top">
-                                        <img th:src="@{/img/search.png}" width="40" height="40"/>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-link btn-xs" th:href="@{'/medico/prontuario/' + ${paciente.id} }"
-                                       title="Prontuário" rel="tooltip"
-                                       data-placement="top">
-                                        <img th:src="@{/img/medical-records.png}" width="40" height="40"/>
-                                    </a>
-                                </td>
-                            </div>
                             <div sec:authorize="hasRole('ROLE_SECRETARIA')">
                                 <td>
                                     <a class="btn btn-link btn-xs" th:href="@{'/secretaria/consulta/' + ${paciente.id} }"
@@ -79,14 +58,7 @@
                                         <img th:src="@{/img/analytics.png}" width="40" height="40"/>
                                     </a>
                                 </td>
-                                <td class="text-center">
-                                    <a class="btn btn-link btn-xs" th:href="@{'/secretaria/' + ${paciente.id} }"
-                                       title="Excluir" rel="tooltip"
-                                       data-placement="top">
-                                        <img th:src="@{/img/file.png}" width="40" height="40"/>
-                                    </a>
-                                </td>
-                            </div>
+                               </div>
                         </tr>
                         </tbody>
                     </table>

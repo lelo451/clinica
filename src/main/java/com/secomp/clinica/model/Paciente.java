@@ -33,9 +33,6 @@ public class Paciente {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Prontuario prontuario;
-
     @OneToMany
     private List<Consulta> consultas;
 
@@ -77,14 +74,6 @@ public class Paciente {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public Prontuario getProntuario() {
-        return prontuario;
-    }
-
-    public void setProntuario(Prontuario prontuario) {
-        this.prontuario = prontuario;
     }
 
     public List<Consulta> getConsultas() {

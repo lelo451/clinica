@@ -72,13 +72,6 @@
                                 Cancelar
                             </button>
                         </div>
-                        <div th:if="${visualizar}">
-                            <a th:href="@{/medico/list}">
-                                <button type="button" class="btn btn-dark">
-                                    Voltar
-                                </button>
-                            </a>
-                        </div>
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -97,7 +90,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Não
                                         </button>
-                                        <a th:href="@{/secretaria/list}">
+                                        <a th:href="@{/secretaria}">
                                             <button type="button" class="btn btn-primary">Sim</button>
                                         </a>
                                     </div>

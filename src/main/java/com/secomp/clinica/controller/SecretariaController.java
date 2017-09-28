@@ -7,7 +7,6 @@ import com.secomp.clinica.model.enums.Role;
 import com.secomp.clinica.repository.ConsultaRepository;
 import com.secomp.clinica.repository.PacienteRepository;
 import com.secomp.clinica.repository.UsuarioRepository;
-import com.secomp.clinica.util.Horario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -110,18 +109,10 @@ public class SecretariaController {
         return "redirect:/secretaria/list";
     }
 
-    @PostMapping("/horario")
-    public @ResponseBody Iterable<String> listaHorariosDisponiveis(Date data, String medico, String tipo_consulta) {
-        LocalTime agora = LocalTime.now();
-        Horario horarios = new Horario(consultaRepository);
-        List horas = horarios.horariosDisponiveis(data,tipo_consulta, medico, agora);
-        return horas;
-    }
-
     @GetMapping("/consulta/{id}")
     public String abreTelaDeNovaConsulta(Model model, @PathVariable Integer id) {
         model.addAttribute("consulta", new Consulta());
-        model.addAttribute("medicos", usuarioRepository.findAllByRole(Role.ROLE_MEDICO));
+       // model.addAttribute("medicos", usuarioRepository.findAllByRole(Role.ROLE_MEDICO));
         model.addAttribute("pacienteID", id);
         return "secretaria/consulta/cadastro";
     }

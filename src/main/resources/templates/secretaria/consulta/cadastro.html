@@ -60,23 +60,7 @@
                                             th:text="${consulta.consulta}"></option>
                                 </select>
                             </div>
-                            <div class="form-group col-6">
-                                <label for="medico" class="col-form-label">Médico<span
-                                        class="obrigatorio">*</span></label>
-                                <select class="form-control" th:field="*{medico}" required="required">
-                                    <option value="">Selecione o Médico</option>
-                                    <option th:each="medico : ${medicos}" th:value="${medico.nome}"
-                                            th:text="${medico.nome}"></option>
-                                </select>
-                                <div id="medicoError" class="invalid-feedback"></div>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="hora" class="col-form-label">Horário<span
-                                        class="obrigatorio">*</span></label>
-                                <select class="form-control" th:field="*{hora}" required="required">
-                                    <option value="">Selecione o Médico</option>
-                                </select>
-                            </div>
+
                         </div>
                         <button type="submit" id="btnsubmit" class="btn btn-primary"
                                 th:text="${update} == true ? 'Atualizar Consulta' : 'Agendar Consulta'"></button>
@@ -135,76 +119,7 @@
             $(this).addClass('is-invalid');
             $('#DataError').text("Data Inválida");
         }
-        $.ajax({
-            type: "POST",
-            data: {
-                medico: $('#medico').val(),
-                data: $('#dataConsulta').val(),
-                tipo_consulta: $('#tipoConsulta').val()
-            },
-            cache: false,
-            url: "/secretaria/horario",
-            success: function (data) {
-                var hora = $('#hora');
-                hora.find("option").remove();
-                var select = document.getElementById('hora');
-                if (!$.trim(data)) {
-                    var opt = document.createElement('option');
-                    opt.value = "";
-                    opt.innerHTML = "Nenhum horário disponivel";
-                    select.appendChild(opt);
-                } else {
-                    $.each(data, function (key, value) {
-                        var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
-                        var opt = document.createElement('option');
-                        opt.value = time;
-                        opt.innerHTML = time;
-                        select.appendChild(opt);
-                    });
-                }
-            }, error: function () {
-                var opt = document.createElement('option');
-                opt.value = "";
-                opt.innerHTML = "Digite o nome do medico";
-                select.appendChild(opt);
-            }
-        });
-    });
-    document.getElementById('medico').addEventListener('change', function () {
-        $.ajax({
-            type: "POST",
-            data: {
-                medico: $('#medico').val(),
-                data: $('#dataConsulta').val(),
-                tipo_consulta: $('#tipoConsulta').val()
-            },
-            cache: false,
-            url: "/secretaria/horario",
-            success: function (data) {
-                var hora = $('#hora');
-                hora.find("option").remove();
-                var select = document.getElementById('hora');
-                if (!$.trim(data)) {
-                    var opt = document.createElement('option');
-                    opt.value = "";
-                    opt.innerHTML = "Nenhum horário disponivel";
-                    select.appendChild(opt);
-                } else {
-                    $.each(data, function (key, value) {
-                        var time = (value['hour'] < 10 ? '0' : '') + value['hour'] + ":" + (value['minute'] < 10 ? '0' : '') + value['minute'];
-                        var opt = document.createElement('option');
-                        opt.value = time;
-                        opt.innerHTML = time;
-                        select.appendChild(opt);
-                    });
-                }
-            }, error: function () {
-                var opt = document.createElement('option');
-                opt.value = "";
-                opt.innerHTML = "Digite o nome do medico";
-                select.appendChild(opt);
-            }
-        });
+
     });
     /* ]]> */
 </script>

@@ -18,9 +18,6 @@
         </button>
         <div class="collapse navbar-collapse" id="mobile-menu">
             <ul class="navbar-nav mr-auto">
-                <li sec:authorize="hasRole('ROLE_MEDICO')" class="nav-item">
-                    <a class="nav-link" th:href="@{'/medico'}">Médico</a>
-                </li>
                 <li sec:authorize="hasRole('ROLE_SECRETARIA')" class="nav-item">
                     <a class="nav-link" th:href="@{'/secretaria'}">Secretária</a>
                 </li>
@@ -51,8 +48,6 @@
                         <tr class="text-center">
                             <th>Nome</th>
                             <th>Data</th>
-                            <th>Horário</th>
-                            <th>Médico</th>
                             <th>Tipo</th>
                         </tr>
                         </thead>
@@ -60,8 +55,6 @@
                         <tr th:each="consulta: ${consultas}" class="text-center">
                             <td th:text="${consulta.paciente.nome}"></td>
                             <td th:text="${#dates.format(consulta.dataConsulta, 'dd/MM/yyyy')}"></td>
-                            <td th:text="${consulta.hora}"></td>
-                            <td th:text="${consulta.medico}"></td>
                             <td th:text="${consulta.tipoConsulta}"></td>
                         </tr>
                         </tbody>
